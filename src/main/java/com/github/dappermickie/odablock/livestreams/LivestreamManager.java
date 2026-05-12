@@ -3,12 +3,13 @@ package com.github.dappermickie.odablock.livestreams;
 import com.github.dappermickie.odablock.ChatRightClickManager;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.RightClickAction;
+import com.github.dappermickie.odablock.sounds.LivestreamLiveSound;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.GameTick;
@@ -21,7 +22,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-@Slf4j
 @Singleton
 public class LivestreamManager
 {
@@ -53,6 +53,9 @@ public class LivestreamManager
 	@Inject
 	private ScheduledExecutorService executor;
 
+	@Inject
+	private LivestreamLiveSound livestreamLiveSound;
+
 	public void onGameTick(GameTick gameTick)
 	{
 		if (!config.livestream())
@@ -60,10 +63,11 @@ public class LivestreamManager
 			return;
 		}
 
+		handleTickReset();
 		sendLivestreamMessage(false);
 
 		int currentTick = client.getTickCount();
-		if (lastChecked == -1 || currentTick - lastChecked > 100)
+		if (lastChecked == -1 || currentTick < lastChecked || currentTick - lastChecked > 100)
 		{
 			executor.submit(() -> {
 				sendRequest(currentTick);
@@ -73,10 +77,18 @@ public class LivestreamManager
 		}
 	}
 
+	public void resetStateForWorldHopOrLogin()
+	{
+		// Reset poll/message timing so we immediately refresh after state transitions.
+		// Keep the last livestream snapshot so hop/login doesn't count as a live transition.
+		lastChecked = -1;
+		lastSentMessage = -1;
+	}
+
 	private void sendRequest(final int currentTick)
 	{
 		Request request = new Request.Builder()
-			.url("https://raw.githubusercontent.com/DapperMickie/odablock-sounds-notifier/main/livestream.json")
+			.url("https://live.odablock.cc/")
 			.build();
 		try (Response response = okHttpClient.newCall(request).execute())
 		{
@@ -88,20 +100,36 @@ public class LivestreamManager
 			String jsonResponse = response.body().string();
 			Livestream newLivestream = gson.fromJson(jsonResponse, Livestream.class);
 
+			if (newLivestream == null)
+			{
+				return;
+			}
+
 			if (livestream != null &&
-				newLivestream.getKick().isLive() == livestream.getKick().isLive() &&
-				newLivestream.getTwitch().isLive() == livestream.getTwitch().isLive())
+				newLivestream.isLive() == livestream.isLive() &&
+				Objects.equals(newLivestream.getTitle(), livestream.getTitle()))
 			{
 				lastChecked = currentTick;
 				return;
 			}
 
+			final boolean wasLive = livestream != null && livestream.isLive();
+			final boolean isLive = newLivestream.isLive();
+			final boolean becameLive = livestream != null && !wasLive && isLive;
+
 			livestream = newLivestream;
 			clientThread.invokeLater(() -> {
 				sendLivestreamMessage(true);
+				if (becameLive)
+				{
+					livestreamLiveSound.playSound();
+				}
 			});
 		}
-		catch (IOException ignored)
+		catch (IOException e)
+		{
+		}
+		catch (Exception e)
 		{
 		}
 	}
@@ -111,13 +139,16 @@ public class LivestreamManager
 		final int currentTick = client.getTickCount();
 
 		// Only send once every x minutes, unless we force send (in case he goes live)
-		if (!force && lastSentMessage != -1 && currentTick - lastSentMessage < config.livestreamInterval() * 100)
+		if (!force &&
+			lastSentMessage != -1 &&
+			currentTick >= lastSentMessage &&
+			currentTick - lastSentMessage < config.livestreamInterval() * 100)
 		{
 			return;
 		}
 
 		// Only send if oda is live
-		if (livestream == null || (!livestream.getTwitch().isLive() && !livestream.getKick().isLive()))
+		if (livestream == null || !livestream.isLive())
 		{
 			return;
 		}
@@ -126,47 +157,38 @@ public class LivestreamManager
 
 		ChatMessageBuilder chatMessage = new ChatMessageBuilder();
 		String hex = Integer.toHexString(config.livestreamColor().getRGB()).substring(2);
-		String message;
-		if (livestream.getKick().isLive())
+		final String title = livestream.getTitle() == null ? "" : livestream.getTitle().trim();
+		chatMessage
+			.append(ChatColorType.NORMAL)
+			.append("Odablock is live! ");
+
+		if (!title.isEmpty())
 		{
-			final String title = livestream.getKick().getTitle().split("\\|")[0].trim();
 			chatMessage
-				.append(ChatColorType.NORMAL)
-				.append("Odablock is live on ")
-				.append(ChatColorType.HIGHLIGHT)
-				.append("KICK")
-				.append(ChatColorType.NORMAL)
-				.append("! ")
 				.append(ChatColorType.HIGHLIGHT)
 				.append(title);
-			message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);
-			RightClickAction rightClickAction = new RightClickAction("Open Kick Stream", "https://kick.com/odablock");
-			chatRightClickManager.putInMap(message, rightClickAction);
 		}
-		else if (livestream.getTwitch().isLive())
-		{
-			final String title = livestream.getTwitch().getTitle().split("\\|")[0].trim();
-			chatMessage.append(ChatColorType.NORMAL)
-				.append("Odablock is live on ")
-				.append(ChatColorType.HIGHLIGHT)
-				.append("TWITCH")
-				.append(ChatColorType.NORMAL)
-				.append("! ")
-				.append(ChatColorType.HIGHLIGHT)
-				.append(title);
-			message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);
-			RightClickAction rightClickAction = new RightClickAction("Open Twitch Stream", "https://twitch.tv/odablock");
-			chatRightClickManager.putInMap(message, rightClickAction);
-		}
-		else
-		{
-			// return if not live on either kick or twitch
-			return;
-		}
+
+		String message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);
+		RightClickAction rightClickAction = new RightClickAction("Open Livestream", "https://kick.com/odablock");
+		chatRightClickManager.putInMap(message, rightClickAction);
 
 		chatMessageManager.queue(QueuedMessage.builder()
 			.type(ChatMessageType.GAMEMESSAGE)
 			.runeLiteFormattedMessage(message)
 			.build());
+	}
+
+	private void handleTickReset()
+	{
+		final int currentTick = client.getTickCount();
+		if (lastChecked != -1 && currentTick < lastChecked)
+		{
+			lastChecked = -1;
+		}
+		if (lastSentMessage != -1 && currentTick < lastSentMessage)
+		{
+			lastSentMessage = -1;
+		}
 	}
 }

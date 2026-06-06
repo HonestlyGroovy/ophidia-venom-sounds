@@ -6,7 +6,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
@@ -55,7 +55,7 @@ public class DeclineTrade
 			// Decline trade
 			if (option.equals(DECLINE_MSG))
 			{
-				soundEngine.playClip(Sound.DECLINE_TRADE, SoundOverrideAction.DECLINE_TRADE, executor);
+				soundEngine.playClip(Sound.DECLINE_TRADE, executor);
 			}
 		}
 	}

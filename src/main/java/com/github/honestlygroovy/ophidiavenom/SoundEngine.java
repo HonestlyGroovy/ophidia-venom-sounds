@@ -1,7 +1,5 @@
 package com.github.honestlygroovy.ophidiavenom;
 
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javax.sound.sampled.LineUnavailableException;
@@ -27,27 +25,14 @@ public class SoundEngine
 	@Inject
 	private AudioPlayer audioPlayer;
 
-	@Inject
-	private SoundOverrideService soundOverrideService;
-
 	public void playClip(Sound sound, Executor executor)
 	{
-		executor.execute(() -> playClipInternal(sound, null));
-	}
-
-	public void playClip(SoundOverrideAction action, Executor executor)
-	{
-		executor.execute(() -> playClipInternal(action.getDefaultSound(), action));
-	}
-
-	public void playClip(Sound sound, SoundOverrideAction action, Executor executor)
-	{
-		executor.execute(() -> playClipInternal(sound, action));
+		executor.execute(() -> playClipInternal(sound));
 	}
 
 	public void playClip(Sound sound, ScheduledExecutorService executor, Duration initialDelay)
 	{
-		executor.schedule(() -> playClipInternal(sound, null), initialDelay.toMillis(), TimeUnit.MILLISECONDS);
+		executor.schedule(() -> playClipInternal(sound), initialDelay.toMillis(), TimeUnit.MILLISECONDS);
 	}
 
 	public void playFile(File file, Executor executor)
@@ -77,7 +62,7 @@ public class SoundEngine
 		}
 	}
 
-	private void playClipInternal(Sound sound, SoundOverrideAction action)
+	private void playClipInternal(Sound sound)
 	{
 		if (SoundFileManager.getIsUpdating())
 		{
@@ -87,21 +72,11 @@ public class SoundEngine
 		float gain = 20f * (float) Math.log10(config.announcementVolume() / 100f);
 		try
 		{
-			File soundFile = action == null
-				? SoundFileManager.getSoundStream(sound)
-				: soundOverrideService.getRandomOverrideFile(action).orElseGet(() -> {
-					try
-					{
-						return SoundFileManager.getSoundStream(sound);
-					}
-					catch (FileNotFoundException fileNotFoundException)
-					{
-						return null;
-					}
-				});
+			File soundFile = SoundFileManager.getSoundStream(sound);
+
 			if (soundFile == null)
 			{
-				log.warn("No audio file available for {}", action != null ? action.getDisplayName() : sound.name());
+				log.warn("No audio file available for {}", sound.name());
 				return;
 			}
 

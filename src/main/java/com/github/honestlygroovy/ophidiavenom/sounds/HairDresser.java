@@ -3,7 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
@@ -46,7 +46,7 @@ public class HairDresser
 			WorldPoint currentLocation = client.getLocalPlayer().getWorldLocation();
 			if (FALADOR_HAIRDRESSER.contains(currentLocation))
 			{
-				soundEngine.playClip(Sound.HAIRDRESSER_SOUND_1, SoundOverrideAction.HAIRDRESSER, executor);
+				soundEngine.playClip(Sound.HAIRDRESSER_SOUND_1, executor);
 			}
 			return;
 		}

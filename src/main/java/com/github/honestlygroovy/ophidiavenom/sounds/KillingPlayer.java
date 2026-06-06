@@ -5,7 +5,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.PlayerKillLineManager;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -92,6 +92,6 @@ public class KillingPlayer
 		{
 			client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, message, null);
 		}
-		soundEngine.playClip(Sound.KILLING_SOMEONE_1, SoundOverrideAction.KILLING_PLAYER, executor);
+		soundEngine.playClip(Sound.KILLING_SOMEONE_1, executor);
 	}
 }

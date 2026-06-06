@@ -4,7 +4,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import static com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin.OPHIDIAVENOM;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -43,7 +43,7 @@ public class CombatAchievements
 		{
 			client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Combat task: completed.", null);
 		}
-		soundEngine.playClip(Sound.COMBAT_TASK, SoundOverrideAction.COMBAT_ACHIEVEMENT, executor);
+		soundEngine.playClip(Sound.COMBAT_TASK, executor);
 		return true;
 	}
 }

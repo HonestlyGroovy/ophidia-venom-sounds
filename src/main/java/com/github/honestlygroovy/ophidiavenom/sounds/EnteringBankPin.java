@@ -4,7 +4,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 import com.github.honestlygroovy.ophidiavenom.SoundIds;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.SoundEffectPlayed;
@@ -39,7 +39,7 @@ public class EnteringBankPin
 			if (soundId == SoundIds.BANK_PIN.Id)
 			{
 				event.consume();
-				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, SoundOverrideAction.BANK_PIN, executor);
+				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, executor);
 				return;
 			}
 		}

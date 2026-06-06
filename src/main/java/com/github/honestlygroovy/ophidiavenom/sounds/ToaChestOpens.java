@@ -3,7 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -39,6 +39,6 @@ public class ToaChestOpens
 		}
 
 		// The sarcophagus spawns as the player starts looting the chest
-		soundEngine.playClip(Sound.TOA_CHEST_OPENS, SoundOverrideAction.TOA_CHEST_OPENS, executor);
+		soundEngine.playClip(Sound.TOA_CHEST_OPENS, executor);
 	}
 }

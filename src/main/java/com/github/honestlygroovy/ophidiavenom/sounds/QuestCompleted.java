@@ -4,7 +4,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import static com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin.OPHIDIAVENOM;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
@@ -43,7 +43,7 @@ public class QuestCompleted
 		{
 			client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Quest: completed.", null);
 		}
-		soundEngine.playClip(Sound.QUEST, SoundOverrideAction.QUEST_COMPLETED, executor);
+		soundEngine.playClip(Sound.QUEST, executor);
 		return true;
 	}
 }

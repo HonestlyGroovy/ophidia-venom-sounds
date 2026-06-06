@@ -3,7 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Matcher;
@@ -96,12 +96,12 @@ public class CoxSounds
 			{
 				if (config.coxWhiteChest())
 				{
-					soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, SoundOverrideAction.COX_WHITE_CHEST, executor);
+					soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
 				}
 			}
 			else if (config.coxPurpleChest())
 			{
-				soundEngine.playClip(Sound.GETTING_PURPLE_1, SoundOverrideAction.COX_PURPLE_CHEST, executor);
+				soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
 			}
 		}
 	}

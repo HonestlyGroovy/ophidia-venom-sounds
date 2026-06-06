@@ -4,7 +4,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 import com.github.honestlygroovy.ophidiavenom.SoundIds;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
@@ -45,7 +45,7 @@ public class PrayerDown
 	{
 		if (canReplacePrayerDownSound() && checkLowPrayer())
 		{
-			soundEngine.playClip(Sound.SMITED_NO_PRAYER, SoundOverrideAction.PRAYER_DOWN, executor);
+			soundEngine.playClip(Sound.SMITED_NO_PRAYER, executor);
 		}
 	}
 

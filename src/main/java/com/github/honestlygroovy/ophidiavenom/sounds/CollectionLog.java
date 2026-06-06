@@ -4,7 +4,7 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import static com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin.OPHIDIAVENOM;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Pattern;
@@ -78,7 +78,7 @@ public class CollectionLog
 		{
 			client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Collection log slot: completed.", null);
 		}
-		soundEngine.playClip(Sound.COLLECTION_LOG_SLOT, SoundOverrideAction.COLLECTION_LOG, executor);
+		soundEngine.playClip(Sound.COLLECTION_LOG_SLOT, executor);
 		return true;
 	}
 

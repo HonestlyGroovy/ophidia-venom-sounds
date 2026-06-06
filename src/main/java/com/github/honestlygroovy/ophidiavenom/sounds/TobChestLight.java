@@ -5,7 +5,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -100,17 +100,17 @@ public class TobChestLight
 						// TODO: Maybe change sound if it's yours
 						if (isMine)
 						{
-							soundEngine.playClip(Sound.GETTING_PURPLE_1, SoundOverrideAction.TOB_PURPLE_CHEST, executor);
+							soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
 						}
 						else
 						{
-							soundEngine.playClip(Sound.GETTING_PURPLE_1, SoundOverrideAction.TOB_PURPLE_CHEST, executor);
+							soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
 						}
 					}
 				}
 				else if (config.tobWhiteChest())
 				{
-					soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, SoundOverrideAction.TOB_WHITE_CHEST, executor);
+					soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
 				}
 			}
 		}

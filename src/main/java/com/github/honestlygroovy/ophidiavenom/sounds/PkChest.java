@@ -3,7 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -59,7 +59,7 @@ public class PkChest
 		{
 			if (Text.standardize(widget.getText()).startsWith("value in chest: "))
 			{
-				soundEngine.playClip(Sound.CLICKING_PK_LOOT_CHEST, SoundOverrideAction.PK_CHEST, executor);
+				soundEngine.playClip(Sound.CLICKING_PK_LOOT_CHEST, executor);
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 package com.github.honestlygroovy.ophidiavenom.sounds;
 
 import com.github.honestlygroovy.ophidiavenom.*;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -66,7 +66,7 @@ public class TurnOnRun extends TimedSoundBase
 				{
 					client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, message, null);
 				}
-				soundEngine.playClip(Sound.TURNING_ON_RUN, SoundOverrideAction.TURN_ON_RUN, executor);
+				soundEngine.playClip(Sound.TURNING_ON_RUN, executor);
 				setLastPlayedTickTick(currentTick);
 			}
 		}

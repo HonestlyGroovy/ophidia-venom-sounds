@@ -2,7 +2,6 @@ package com.github.honestlygroovy.ophidiavenom;
 
 
 import com.github.honestlygroovy.ophidiavenom.livestreams.LivestreamManager;
-import com.github.honestlygroovy.ophidiavenom.ui.SoundOverridesPanel;
 import com.github.honestlygroovy.ophidiavenom.sounds.AcceptTrade;
 import com.github.honestlygroovy.ophidiavenom.sounds.AchievementDiaries;
 import com.github.honestlygroovy.ophidiavenom.sounds.CollectionLog;
@@ -47,9 +46,7 @@ import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.NpcDespawned;
 import net.runelite.api.events.ScriptCallbackEvent;
 import net.runelite.api.events.SoundEffectPlayed;
 import net.runelite.api.events.StatChanged;
@@ -68,8 +65,8 @@ import okhttp3.OkHttpClient;
 
 @Slf4j
 @PluginDescriptor(
-	name = "Ophidiavenom Plugin",
-	description = "Replace and add in-game sounds by Ophidiavenom",
+	name = "OphidiaVenom Plugin",
+	description = "Replace and add in-game sounds by OphidiaVenom",
 	tags = {"ophidiavenom", "stats", "levels", "quests", "diary", "announce"}
 )
 
@@ -173,15 +170,12 @@ public class OphidiavenomPlugin extends Plugin
 	private ClientToolbar clientToolbar;
 
 	@Inject
-	private SoundOverridesPanel soundOverridesPanel;
-
-	@Inject
 	@Named("developerMode")
 	private boolean developerMode;
 
 	private NavigationButton soundOverridesNavigationButton;
 
-	public static final String OPHIDIAVENOM = "Ophidiavenom";
+	public static final String OPHIDIAVENOM = "OphidiaVenom";
 
 	@Override
 	protected void startUp() throws Exception
@@ -189,7 +183,6 @@ public class OphidiavenomPlugin extends Plugin
 		clientThread.invoke(this::setupOldMaps);
 		achievementDiaries.setLastLoginTick(-1);
 		prayerDown.setLastLoginTick(-1);
-		SwingUtilities.invokeLater(this::setUpOverridesNavigation);
 		executor.submit(() -> {
 			PlayerKillLineManager.Setup(okHttpClient);
 			SoundFileManager.ensureDownloadDirectoryExists();
@@ -203,32 +196,6 @@ public class OphidiavenomPlugin extends Plugin
 		levelUp.clear();
 		achievementDiaries.clearOldAchievementDiaries();
 		soundEngine.close();
-		SwingUtilities.invokeLater(this::removeOverridesNavigation);
-	}
-
-	private void setUpOverridesNavigation()
-	{
-		removeOverridesNavigation();
-		if (!config.showSidebar())
-		{
-			return;
-		}
-		soundOverridesNavigationButton = NavigationButton.builder()
-			.tooltip("Ophidiavenom Sound Overrides")
-			.icon(createOverridesIcon())
-			.priority(8)
-			.panel(soundOverridesPanel)
-			.build();
-		clientToolbar.addNavigation(soundOverridesNavigationButton);
-	}
-
-	private void removeOverridesNavigation()
-	{
-		if (soundOverridesNavigationButton != null)
-		{
-			clientToolbar.removeNavigation(soundOverridesNavigationButton);
-			soundOverridesNavigationButton = null;
-		}
 	}
 
 	private static BufferedImage createOverridesIcon()
@@ -367,10 +334,13 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
+		/*
 		if (developerMode && config.developerLogging())
 		{
 			debugScripts.onVarbitChanged(event);
 		}
+		*/
+
 
 		turnOnRun.onVarbitChanged(event);
 		tobChestLight.onVarbitChanged(event);
@@ -382,10 +352,13 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
+		/*
 		if (developerMode && config.developerLogging())
 		{
 			debugScripts.onMenuOptionClicked(menuOptionClicked);
 		}
+
+		 */
 
 		petDog.onMenuOptionClicked(menuOptionClicked);
 		turnOnRun.onMenuOptionClicked(menuOptionClicked);
@@ -397,10 +370,13 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded event)
 	{
+		/*
 		if (developerMode && config.developerLogging())
 		{
 			debugScripts.onWidgetLoaded(event);
 		}
+
+		 */
 
 		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
@@ -411,19 +387,6 @@ public class OphidiavenomPlugin extends Plugin
 	OphidiavenomConfig provideConfig(ConfigManager configManager)
 	{
 		return configManager.getConfig(OphidiavenomConfig.class);
-	}
-
-	@Subscribe
-	public void onConfigChanged(ConfigChanged event)
-	{
-		if (OphidiavenomConfig.CONFIG_GROUP.equals(event.getGroup()))
-		{
-			collectionLog.onConfigChanged(event);
-			if (event.getKey().equals("showSidebar"))
-			{
-				SwingUtilities.invokeLater(this::setUpOverridesNavigation);
-			}
-		}
 	}
 
 	@Subscribe
@@ -483,10 +446,13 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onScriptCallbackEvent(ScriptCallbackEvent scriptCallbackEvent)
 	{
+		/*
 		if (developerMode && config.developerLogging())
 		{
 			debugScripts.onScriptCallbackEvent(scriptCallbackEvent);
 		}
+
+		 */
 	}
 
 	public static int TO_GROUP(int id)

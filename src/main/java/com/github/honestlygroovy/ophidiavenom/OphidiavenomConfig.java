@@ -40,7 +40,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "showChatMessages",
 		name = "Show Fake Public Chat Message",
-		description = "Should Ophidiavenom announce your achievements in game chat as well as audibly? Only you will see these messages.",
+		description = "Should OphidiaVenom announce your achievements in game chat as well as audibly? Only you will see these messages.",
 		section = GENERAL_SECTION,
 		position = 12
 	)
@@ -52,25 +52,13 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "onlyForOwnPlayer",
 		name = "Only Own Player",
-		description = "Should Ophidiavenom sounds play for your player only? For example: AGS spec, DDS spec, etc.",
+		description = "Should OphidiaVenom sounds play for your player only?",
 		section = GENERAL_SECTION,
 		position = 13
 	)
 	default boolean ownPlayerOnly()
 	{
 		return true;
-	}
-
-	@ConfigItem(
-		keyName = "showSidebar",
-		name = "Show Override Sidebar",
-		description = "Show the sound override sidebar panel on the right side of the screen.",
-		section = GENERAL_SECTION,
-		position = 14
-	)
-	default boolean showSidebar()
-	{
-		return false;
 	}
 
 	// =========================================================================
@@ -87,7 +75,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "prayerMessage",
 		name = "Prayer Message",
-		description = "Should Ophidiavenom let you know when you run out of prayer?",
+		description = "Should OphidiaVenom let you know when you run out of prayer?",
 		section = SPECS_SECTION,
 		position = 28
 	)
@@ -112,7 +100,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "playerKilling",
 		name = "Player Killing",
-		description = "Should Ophidiavenom tell you something when you kill a player? This only works if you're still close to the player when they die.",
+		description = "Should OphidiaVenom tell you something when you kill a player? This only works if you're still close to the player when they die.",
 		section = PVP_SECTION,
 		position = 31
 	)
@@ -124,7 +112,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "pkChest",
 		name = "PK Chest",
-		description = "Should Ophidiavenom say something whenever you open the PK chest?",
+		description = "Should OphidiaVenom say something whenever you open the PK chest?",
 		section = PVP_SECTION,
 		position = 33
 	)
@@ -147,7 +135,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceLevelUp",
 		name = "Level Ups",
-		description = "Should Ophidiavenom announce when you gain a level in a skill?",
+		description = "Should OphidiaVenom announce when you gain a level in a skill?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 41
 	)
@@ -159,7 +147,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceLevelUpIncludesVirtual",
 		name = "Include Virtual Level Ups",
-		description = "Should Ophidiavenom announce when you gain a virtual level above 99 in a skill?",
+		description = "Should OphidiaVenom announce when you gain a virtual level above 99 in a skill?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 42
 	)
@@ -171,7 +159,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceLevel99",
 		name = "Level 99",
-		description = "Should Ophidiavenom play the gamon sound when you reach level 99 in a skill? This replaces the standard level-up sound for that milestone.",
+		description = "Should OphidiaVenom announce when you reach level 99 in a skill? This replaces the standard level-up sound for that milestone.",
 		section = ACHIEVEMENTS_SECTION,
 		position = 43
 	)
@@ -183,7 +171,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceQuestCompletion",
 		name = "Quest Completions",
-		description = "Should Ophidiavenom announce when you complete a quest?",
+		description = "Should OphidiaVenom announce when you complete a quest?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 44
 	)
@@ -195,7 +183,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceCollectionLog",
 		name = "New Collection Log Entry",
-		description = "Should Ophidiavenom announce when you fill in a new slot in your collection log? This relies on you having chat messages enabled in the game settings, including the popup option.",
+		description = "Should OphidiaVenom announce when you fill in a new slot in your collection log? This relies on you having chat messages enabled in the game settings, including the popup option.",
 		section = ACHIEVEMENTS_SECTION,
 		position = 45
 	)
@@ -207,7 +195,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceAchievementDiary",
 		name = "Completed Achievement Diaries",
-		description = "Should Ophidiavenom announce when you complete a new achievement diary?",
+		description = "Should OphidiaVenom announce when you complete a new achievement diary?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 46
 	)
@@ -219,7 +207,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceCombatAchievement",
 		name = "Completed Combat Achievement Tasks",
-		description = "Should Ophidiavenom announce when you complete a new combat achievement task?",
+		description = "Should OphidiaVenom announce when you complete a new combat achievement task?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 47
 	)
@@ -231,7 +219,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "announceDeath",
 		name = "When You Die",
-		description = "Should Ophidiavenom say something when you die?",
+		description = "Should OphidiaVenom say something when you die?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 48
 	)
@@ -243,7 +231,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "receivedPet",
 		name = "Received Pet",
-		description = "Should Ophidiavenom say something whenever you receive a pet?",
+		description = "Should OphidiaVenom say something whenever you receive a pet?",
 		section = ACHIEVEMENTS_SECTION,
 		position = 49
 	)
@@ -266,7 +254,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "acceptTrade",
 		name = "Accept Trade",
-		description = "Should Ophidiavenom say 'Oda the generous strikes again!' when you accept a trade?",
+		description = "Should OphidiaVenom say something when you accept a trade?",
 		section = INTERACTIONS_SECTION,
 		position = 51
 	)
@@ -278,7 +266,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "declineTrade",
 		name = "Decline Trade",
-		description = "Should Ophidiavenom say 'No Sanks!' when you decline a trade?",
+		description = "Should OphidiaVenom say something when you decline a trade?",
 		section = INTERACTIONS_SECTION,
 		position = 52
 	)
@@ -290,7 +278,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "dismissRandomEvent",
 		name = "Dismiss Random Event",
-		description = "Should Ophidiavenom say 'No sanks!' when you dismiss a random event?",
+		description = "Should OphidiaVenom say something when you dismiss a random event?",
 		section = INTERACTIONS_SECTION,
 		position = 53
 	)
@@ -302,7 +290,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "petDog",
 		name = "Pet the Dog",
-		description = "Should Stella say 'Who's a good little zoggy!' when you pet the dog?",
+		description = "Should OphidiaVenom say something when you pet a dog?",
 		section = INTERACTIONS_SECTION,
 		position = 54
 	)
@@ -314,7 +302,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "giveBone",
 		name = "Give Bone",
-		description = "Should Stella say something whenever you give a bone to a dog?",
+		description = "Should OphidiaVenom say something when you give a dog a bone?",
 		section = INTERACTIONS_SECTION,
 		position = 55
 	)
@@ -326,7 +314,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "hairDresser",
 		name = "Hairdresser",
-		description = "Should Ophidiavenom say something whenever you open the hairdresser interface in Falador?",
+		description = "Should OphidiaVenom say something whenever you open the hairdresser interface in Falador?",
 		section = INTERACTIONS_SECTION,
 		position = 56
 	)
@@ -338,7 +326,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "turnOnRun",
 		name = "Turn on Run",
-		description = "Should Ophidiavenom say 'FAST! I said FAST!' when you turn your run on?",
+		description = "Should no say 'FAST! I said FAST!' when you turn your run on?",
 		section = INTERACTIONS_SECTION,
 		position = 57
 	)
@@ -350,7 +338,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "bankPin",
 		name = "Bank PIN",
-		description = "Should Ophidiavenom make the 'ai ai ai ai' sound when you type in your bank PIN?",
+		description = "Should OphidiaVenom make sounds when you type in your bank PIN?",
 		section = INTERACTIONS_SECTION,
 		position = 58
 	)
@@ -373,7 +361,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "toaWhiteChest",
 		name = "TOA White Chest",
-		description = "When enabled, Ophidiavenom will say something if you receive a white light.",
+		description = "When enabled, OphidiaVenom will say something if you receive a white light.",
 		section = TOA_SECTION,
 		position = 101
 	)
@@ -385,7 +373,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "toaPurpleChest",
 		name = "TOA Purple Chest",
-		description = "When enabled, Ophidiavenom will say something if you receive a purple light.",
+		description = "When enabled, OphidiaVenom will say something if you receive a purple light.",
 		section = TOA_SECTION,
 		position = 102
 	)
@@ -397,7 +385,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "enableToaPurpleChestOpens",
 		name = "Opening the Chest",
-		description = "When enabled, Ophidiavenom will say 'Please GAGECK' whenever someone in your party opens the purple chest at TOA.",
+		description = "When enabled, OphidiaVenom will say something whenever someone in your party opens the purple chest at TOA.",
 		section = TOA_SECTION,
 		position = 103
 	)
@@ -416,7 +404,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "tobWhiteChest",
 		name = "TOB White Chest",
-		description = "Should Ophidiavenom say something whenever you receive a white chest at TOB?",
+		description = "Should OphidiaVenom say something whenever you receive a white chest at TOB?",
 		section = TOB_SECTION,
 		position = 201
 	)
@@ -428,7 +416,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "tobPurpleChest",
 		name = "TOB Purple Chest",
-		description = "Should Ophidiavenom say something whenever you receive a purple chest at TOB?",
+		description = "Should OphidiaVenom say something whenever you receive a purple chest at TOB?",
 		section = TOB_SECTION,
 		position = 202
 	)
@@ -447,7 +435,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "coxWhiteChest",
 		name = "COX White Chest",
-		description = "Should Ophidiavenom say something whenever you get a white light at COX?",
+		description = "Should OphidiaVenom say something whenever you get a white light at COX?",
 		section = COX_SECTION,
 		position = 301
 	)
@@ -459,7 +447,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "coxPurpleChest",
 		name = "COX Purple Chest",
-		description = "Should Ophidiavenom say something whenever you get a purple light at COX?",
+		description = "Should OphidiaVenom say something whenever you get a purple light at COX?",
 		section = COX_SECTION,
 		position = 302
 	)
@@ -482,7 +470,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "livestream",
 		name = "Livestream Notification",
-		description = "Should Ophidiavenom send a message whenever he is live?",
+		description = "Should OphidiaVenom send a message whenever she is live?",
 		section = LIVESTREAM_SECTION,
 		position = 501
 	)
@@ -494,7 +482,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 		keyName = "livestreamPlaySound",
 		name = "Play Sound",
-		description = "Should Ophidiavenom play a sound when he goes live?",
+		description = "Should OphidiaVenom play a sound when she goes live?",
 		section = LIVESTREAM_SECTION,
 		position = 502
 	)
@@ -538,7 +526,7 @@ public interface OphidiavenomConfig extends Config
 		closedByDefault = true
 	)
 	String DEVELOPER_SECTION = "developerSection";
-
+/*
 	@ConfigItem(
 		keyName = "developerLogging",
 		name = "Developer Logging",
@@ -550,7 +538,7 @@ public interface OphidiavenomConfig extends Config
 	{
 		return false;
 	}
-
+*/
 	// =========================================================================
 	// Internal (hidden)
 	// =========================================================================

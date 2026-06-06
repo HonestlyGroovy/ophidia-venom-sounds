@@ -5,7 +5,7 @@ import static com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin.OPHIDIAV
 
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -83,7 +83,7 @@ public class AchievementDiaries
 				{
 					client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Achievement diary: completed.", null);
 				}
-				soundEngine.playClip(Sound.ACHIEVEMENT_DIARY, SoundOverrideAction.ACHIEVEMENT_DIARY, executor);
+				soundEngine.playClip(Sound.ACHIEVEMENT_DIARY, executor);
 			}
 		}
 	}

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
@@ -24,8 +25,14 @@ import net.runelite.client.chat.QueuedMessage;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import lombok.extern.slf4j.Slf4j;
 
 @Singleton
+@Slf4j
 public class LivestreamManager
 {
 	private static final Duration LIVE_SOUND_MAX_AGE = Duration.ofMinutes(3);
@@ -92,70 +99,163 @@ public class LivestreamManager
 		lastSentMessage = -1;
 		suppressLiveTransitionSound = true;
 	}
+	public static long extract(String text, String regex)
+	{
+
+		Matcher matcher = Pattern.compile(regex).matcher(text);
+		if (matcher.find())
+		{
+			return Long.parseLong(matcher.group(1));
+		}
+		return 0;
+	}
+
+	public static Duration parseUptimeToDuration(String uptime)
+	{
+		String text = uptime.toLowerCase();
+
+		long hours = extract(text, "(\\d+)\\s*hour");
+		long minutes = extract(text, "(\\d+)\\s*minute");
+		long seconds = extract(text, "(\\d+)\\s*second");
+
+		if (hours == 0 && minutes == 0 && seconds == 0)
+		{
+			return null;
+		}
+
+		return Duration.ofHours(hours)
+				.plusMinutes(minutes)
+				.plusSeconds(seconds);
+	}
 
 	private void sendRequest(final int currentTick)
 	{
-		//TODO: query twtich for Live status and title
-		Request request = new Request.Builder()
-			.url("https://raw.githubusercontent.com/LogicalSoIutions/ophidiavenom-sounds-live/refs/heads/main/livestream.json")
-			.build();
-		try (Response response = okHttpClient.newCall(request).execute())
-		{
-			if (!response.isSuccessful() || response.body() == null)
+
+		String title = "";
+		String uptime = "";
+		Boolean live = false;
+
+		Request request = new Request.Builder().url("https://decapi.me/twitch/status/ophidiavenom").build();
+
+		try (Response response = okHttpClient.newCall(request).execute()) {
+			if (!response.isSuccessful() || response.body() == null) {
+				return;
+			}
+			else {
+				title = response.body().string();
+
+			}
+			response.close();
+		}
+		catch(IOException e)
 			{
+
+				return;
+			}
+        catch(Exception e)
+			{
+
 				return;
 			}
 
-			String jsonResponse = response.body().string();
-			Livestream newLivestream = gson.fromJson(jsonResponse, Livestream.class);
+		Request request2 = new Request.Builder().url("https://decapi.me/twitch/uptime/ophidiavenom").build();
 
-			if (newLivestream == null)
-			{
+		try (Response response2 = okHttpClient.newCall(request2).execute()) {
+			if (!response2.isSuccessful() || response2.body() == null) {
+
 				return;
+
+			}
+			else {
+				String val = response2.body().string();
+				if (val.contains("offline")) {
+
+					live = false;
+				} else {
+
+					live = true;
+
+					Duration duration = parseUptimeToDuration(val);
+
+					if (duration == null) {
+						return;
+					}
+
+					uptime = Instant.now().minus(duration).truncatedTo(ChronoUnit.MINUTES).toString();
+
+					}
+
+				}
+			response2.close();
 			}
 
-			if (livestream != null &&
-				newLivestream.isLive() == livestream.isLive() &&
-				Objects.equals(newLivestream.getTitle(), livestream.getTitle()) &&
-				Objects.equals(newLivestream.getWentLiveAt(), livestream.getWentLiveAt()))
+		catch(IOException e)
+		{
+			return;
+		}
+		catch(Exception e)
+		{
+			return;
+		}
+
+		StringBuilder jsonResponse = new StringBuilder("{");
+		jsonResponse.append("\n");
+		jsonResponse.append("\"live\": ");
+		jsonResponse.append(live.toString());
+		jsonResponse.append(",");
+		jsonResponse.append("\n");
+		jsonResponse.append("\"title\": ");
+		jsonResponse.append("\"").append(title).append("\"");
+		jsonResponse.append(",");
+		jsonResponse.append("\n");
+		jsonResponse.append("\"wentLiveAt\": ");
+		jsonResponse.append("\"").append(uptime).append("\"");
+		jsonResponse.append("\n");
+		jsonResponse.append("}");
+
+		Livestream newLivestream = gson.fromJson(jsonResponse.toString(), Livestream.class);
+
+		if (newLivestream == null)
+		{
+			return;
+		}
+
+		if (livestream != null &&
+			newLivestream.isLive() == livestream.isLive() &&
+			Objects.equals(newLivestream.getTitle(), livestream.getTitle()) &&
+			Objects.equals(newLivestream.getWentLiveAt(), livestream.getWentLiveAt()))
+		{
+			lastChecked = currentTick;
+			return;
+		}
+
+		final Livestream previousLivestream = livestream;
+		final boolean wasLive = previousLivestream != null && previousLivestream.isLive();
+		final boolean isLive = newLivestream.isLive();
+		final boolean becameOffline = previousLivestream != null && wasLive && !isLive;
+		final boolean wasSuppressingLiveSound = suppressLiveTransitionSound;
+		suppressLiveTransitionSound = false;
+
+		livestream = newLivestream;
+		clientThread.invokeLater(() -> {
+			if (isLive)
 			{
-				lastChecked = currentTick;
-				return;
+				sendLiveLivestreamMessage(true);
 			}
 
-			final Livestream previousLivestream = livestream;
-			final boolean wasLive = previousLivestream != null && previousLivestream.isLive();
-			final boolean isLive = newLivestream.isLive();
-			final boolean becameOffline = previousLivestream != null && wasLive && !isLive;
-			final boolean wasSuppressingLiveSound = suppressLiveTransitionSound;
-			suppressLiveTransitionSound = false;
-
-			livestream = newLivestream;
-			clientThread.invokeLater(() -> {
-				if (isLive)
-				{
-					sendLiveLivestreamMessage(true);
-				}
-
-				if (shouldPlayLiveSound(previousLivestream, newLivestream, wasSuppressingLiveSound))
-				{
-					offlineAnnouncementSent = false;
-					livestreamLiveSound.playSound();
-				}
-				else if (becameOffline && !offlineAnnouncementSent)
-				{
-					sendOfflineLivestreamMessage();
-					offlineAnnouncementSent = true;
-				}
-			});
-		}
-		catch (IOException e)
-		{
-		}
-		catch (Exception e)
-		{
-		}
+			if (shouldPlayLiveSound(previousLivestream, newLivestream, wasSuppressingLiveSound))
+			{
+				offlineAnnouncementSent = false;
+				livestreamLiveSound.playSound();
+			}
+			else if (becameOffline && !offlineAnnouncementSent)
+			{
+				sendOfflineLivestreamMessage();
+				offlineAnnouncementSent = true;
+			}
+		});
 	}
+
 
 	private void sendLiveLivestreamMessage(boolean force)
 	{
@@ -170,7 +270,7 @@ public class LivestreamManager
 			return;
 		}
 
-		// Only send if oda is live
+		// Only send if OphidiaVenom is live
 		if (livestream == null || !livestream.isLive())
 		{
 			return;
@@ -183,7 +283,7 @@ public class LivestreamManager
 		final String title = livestream.getTitle() == null ? "" : livestream.getTitle().trim();
 		chatMessage
 			.append(ChatColorType.NORMAL)
-			.append("Ophidiavenom is live! ");
+			.append("OphidiaVenom is live! ");
 
 		if (!title.isEmpty())
 		{
@@ -200,7 +300,7 @@ public class LivestreamManager
 		ChatMessageBuilder chatMessage = new ChatMessageBuilder();
 		chatMessage
 			.append(ChatColorType.HIGHLIGHT)
-			.append("Ophidiavenom went offline.");
+			.append("OphidiaVenom went offline.");
 
 		String hex = Integer.toHexString(config.livestreamColor().getRGB()).substring(2);
 		queueLivestreamMessage(chatMessage.build(), hex);

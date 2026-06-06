@@ -3,7 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -48,7 +48,7 @@ public class Pet
 			chatMessage.getType() == ChatMessageType.GAMEMESSAGE)
 		{
 			receivedPetTick = client.getTickCount();
-			soundEngine.playClip(Sound.NEW_PET, SoundOverrideAction.NEW_PET, executor);
+			soundEngine.playClip(Sound.NEW_PET, executor);
 			return true;
 		}
 

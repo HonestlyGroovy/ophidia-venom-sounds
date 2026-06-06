@@ -3,7 +3,6 @@ package com.github.honestlygroovy.ophidiavenom.sounds;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
-import com.github.honestlygroovy.ophidiavenom.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -74,7 +73,7 @@ public class LevelUp
 			{
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, level99Message, null);
 			}
-			soundEngine.playClip(Sound.GAMON_GO_LIVE, SoundOverrideAction.LEVEL_99, executor);
+			soundEngine.playClip(Sound.GO_LIVE, executor);
 			return;
 		}
 
@@ -84,7 +83,7 @@ public class LevelUp
 			{
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, message, null);
 			}
-			soundEngine.playClip(Sound.LEVEL_UP, SoundOverrideAction.LEVEL_UP, executor);
+			soundEngine.playClip(Sound.LEVEL_UP, executor);
 		}
 	}
 

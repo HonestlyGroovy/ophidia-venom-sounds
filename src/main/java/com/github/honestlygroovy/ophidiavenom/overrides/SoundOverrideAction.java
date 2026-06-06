@@ -46,7 +46,6 @@ public enum SoundOverrideAction
 	PK_CHEST("pkChest", "PK Chest", Sound.CLICKING_PK_LOOT_CHEST),
 	GIVE_BONE("giveBone", "Give Bone", Sound.EASTER_EGG_STRAYDOG_BONE),
 	HAIRDRESSER("hairdresser", "Hairdresser", Sound.HAIRDRESSER_SOUND_1),
-	SNOWBALLED("snowballed", "Snowballed", Sound.SNOWBALL_1),
 	KILLING_RAT("killingRat", "Killing Rat/Scurrius", Sound.KILLING_RAT_OR_SCURRIUS_1),
 	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", Sound.GAMON_GO_LIVE);
 

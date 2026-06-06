@@ -32,11 +32,8 @@ public class PrayerDown
 	@Inject
 	private ScheduledExecutorService executor;
 
-	@Inject
-	RedemptionProc redemptionProc;
 
 	private int previousPrayerValue = -1;
-	private boolean notifyPrayer = false;
 	private int lastLoginTick = -1;
 
 	public void setLastLoginTick(int tick)
@@ -65,17 +62,9 @@ public class PrayerDown
 		}
 		if (currentPrayerValue <= 0)
 		{
-			if (!notifyPrayer &&
-				!redemptionProc.HasRedemptionProcced())
-			{
-				notifyPrayer = true;
-				return true;
-			}
+			return true;
 		}
-		else
-		{
-			notifyPrayer = false;
-		}
+
 		return false;
 	}
 
@@ -99,6 +88,6 @@ public class PrayerDown
 			return false;
 		}
 
-		return !redemptionProc.HasRedemptionProcced();
+		return true;
 	}
 }

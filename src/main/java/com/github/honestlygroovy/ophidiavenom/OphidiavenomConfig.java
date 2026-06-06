@@ -85,90 +85,6 @@ public interface OphidiavenomConfig extends Config
 	String SPECS_SECTION = "specsSection";
 
 	@ConfigItem(
-		keyName = "rubyBoltProc",
-		name = "Ruby Bolt SLAAA",
-		description = "Should the ruby bolt proc be replaced with Oda's SLAAA?",
-		section = SPECS_SECTION,
-		position = 21
-	)
-	default boolean rubyBoltProc()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "zebakRoar",
-		name = "Zebak Roar",
-		description = "Should Zebak's roar be replaced with Oda's SLAAA?",
-		section = SPECS_SECTION,
-		position = 22
-	)
-	default boolean zebakRoar()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "vengeance",
-		name = "Vengeance",
-		description = "Should Oda's 'Invisivengene' play whenever you cast Vengeance?",
-		section = SPECS_SECTION,
-		position = 23
-	)
-	default boolean vengeance()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "ddsSpec",
-		name = "DDS Spec",
-		description = "Should Ophidiavenom sounds play for your DDS spec?",
-		section = SPECS_SECTION,
-		position = 24
-	)
-	default boolean ddsSpec()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "agsSpec",
-		name = "AGS Spec",
-		description = "Should Ophidiavenom sounds play for your AGS spec?",
-		section = SPECS_SECTION,
-		position = 25
-	)
-	default boolean agsSpec()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "acbSpec",
-		name = "ACB Spec",
-		description = "Should Ophidiavenom sounds play for your ACB spec?",
-		section = SPECS_SECTION,
-		position = 26
-	)
-	default boolean acbSpec()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "dhAxe",
-		name = "DH/Soulreaper Axe Sounds",
-		description = "Should Ophidiavenom say something whenever you switch styles on your DH or Soulreaper Axe?",
-		section = SPECS_SECTION,
-		position = 27
-	)
-	default boolean dhAxe()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "prayerMessage",
 		name = "Prayer Message",
 		description = "Should Ophidiavenom let you know when you run out of prayer?",
@@ -180,17 +96,7 @@ public interface OphidiavenomConfig extends Config
 		return true;
 	}
 
-	@ConfigItem(
-		keyName = "redemptionMessage",
-		name = "Redemption Message",
-		description = "Should Ophidiavenom let you know when you proc Redemption?",
-		section = SPECS_SECTION,
-		position = 29
-	)
-	default boolean redemptionMessage()
-	{
-		return true;
-	}
+
 
 	// =========================================================================
 	// PvP
@@ -216,18 +122,6 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "sendReport",
-		name = "Send Report",
-		description = "Should Ophidiavenom say 'Reported for salutations!' when you report someone?",
-		section = PVP_SECTION,
-		position = 32
-	)
-	default boolean sendReport()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "pkChest",
 		name = "PK Chest",
 		description = "Should Ophidiavenom say something whenever you open the PK chest?",
@@ -235,18 +129,6 @@ public interface OphidiavenomConfig extends Config
 		position = 33
 	)
 	default boolean pkChest()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "snowballed",
-		name = "Snowballed",
-		description = "Should Ophidiavenom say something whenever you get snowballed by Ophidiavenom or one of his mods?",
-		section = PVP_SECTION,
-		position = 34
-	)
-	default boolean snowballed()
 	{
 		return true;
 	}
@@ -366,18 +248,6 @@ public interface OphidiavenomConfig extends Config
 		position = 49
 	)
 	default boolean receivedPet()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "killingRat",
-		name = "Killing Rat or Scurrius",
-		description = "Should Ophidiavenom say something whenever you kill a rat or Scurrius?",
-		section = ACHIEVEMENTS_SECTION,
-		position = 50
-	)
-	default boolean killingRat()
 	{
 		return true;
 	}
@@ -599,54 +469,6 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	// =========================================================================
-	// Music & Emotes
-	// =========================================================================
-
-	@ConfigSection(
-		name = "Music & Emotes",
-		description = "Music replacements and Ophidiavenom emote handling.",
-		position = 400
-	)
-	String MUSIC_EMOTES_SECTION = "musicEmotesSection";
-
-	@ConfigItem(
-		keyName = "warriors",
-		name = "Ophidiavenom Warriors",
-		description = "Should the '7th Realm' in-game sound be replaced with the Ophidiavenom Warriors song?",
-		section = MUSIC_EMOTES_SECTION,
-		position = 401,
-		warning = "If you turn this off, you'll have to reload the client to be able to manually play '7th Realm' again."
-	)
-	default boolean warriors()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "emotes",
-		name = "Emotes",
-		description = "Configures whether some of the text in game gets replaced with Ophidiavenom's emotes.<br />Type '::odaemotes' in chat to see a list of all available emotes.",
-		section = MUSIC_EMOTES_SECTION,
-		position = 402
-	)
-	default boolean emotes()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "emoteIgnoreList",
-		name = "Emote Ignore List",
-		description = "A comma-separated list of emotes to ignore. For example: ':p, :)'.<br />Type '::odaemotes' in chat to see a list of all available emotes.",
-		section = MUSIC_EMOTES_SECTION,
-		position = 403
-	)
-	default String emoteIgnoreList()
-	{
-		return "";
-	}
-
-	// =========================================================================
 	// Livestream
 	// =========================================================================
 
@@ -701,41 +523,6 @@ public interface OphidiavenomConfig extends Config
 		position = 504
 	)
 	default Color livestreamColor()
-	{
-		return Color.RED;
-	}
-
-	// =========================================================================
-	// Notifications
-	// =========================================================================
-
-	@ConfigSection(
-		name = "Notifications",
-		description = "All notification configurations.",
-		position = 600
-	)
-	String NOTIFICATION_SECTION = "notificationSection";
-
-	@ConfigItem(
-		keyName = "notification",
-		name = "Ophidiavenom Notifications",
-		description = "Should Ophidiavenom send notifications?",
-		section = NOTIFICATION_SECTION,
-		position = 601
-	)
-	default boolean notifications()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "notificationColor",
-		name = "Notification Color",
-		description = "Set the color of the notification messages.",
-		section = NOTIFICATION_SECTION,
-		position = 602
-	)
-	default Color notificationColor()
 	{
 		return Color.RED;
 	}

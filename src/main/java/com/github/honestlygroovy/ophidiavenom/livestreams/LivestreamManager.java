@@ -95,6 +95,7 @@ public class LivestreamManager
 
 	private void sendRequest(final int currentTick)
 	{
+		//TODO: query twtich for Live status and title
 		Request request = new Request.Builder()
 			.url("https://raw.githubusercontent.com/LogicalSoIutions/ophidiavenom-sounds-live/refs/heads/main/livestream.json")
 			.build();
@@ -208,7 +209,7 @@ public class LivestreamManager
 	private void queueLivestreamMessage(String chatMessage, String hex)
 	{
 		String message = chatMessage.replaceAll("colHIGHLIGHT", "col=" + hex);
-		RightClickAction rightClickAction = new RightClickAction("Open Livestream", "https://kick.com/ophidiavenom");
+		RightClickAction rightClickAction = new RightClickAction("Open Livestream", "https://twitch.tv/ophidiavenom");
 		chatRightClickManager.putInMap(message, rightClickAction);
 		chatMessageManager.queue(QueuedMessage.builder()
 			.type(ChatMessageType.GAMEMESSAGE)

@@ -1,43 +1,30 @@
 package com.github.honestlygroovy.ophidiavenom;
 
-import com.github.honestlygroovy.ophidiavenom.emotes.EmoteHandler;
+
 import com.github.honestlygroovy.ophidiavenom.livestreams.LivestreamManager;
-import com.github.honestlygroovy.ophidiavenom.notifications.NotificationManager;
 import com.github.honestlygroovy.ophidiavenom.ui.SoundOverridesPanel;
-import com.github.honestlygroovy.ophidiavenom.sounds.AcbSpec;
 import com.github.honestlygroovy.ophidiavenom.sounds.AcceptTrade;
 import com.github.honestlygroovy.ophidiavenom.sounds.AchievementDiaries;
-import com.github.honestlygroovy.ophidiavenom.sounds.AgsSpec;
 import com.github.honestlygroovy.ophidiavenom.sounds.CollectionLog;
 import com.github.honestlygroovy.ophidiavenom.sounds.CombatAchievements;
 import com.github.honestlygroovy.ophidiavenom.sounds.CoxSounds;
-import com.github.honestlygroovy.ophidiavenom.sounds.DdsSpec;
 import com.github.honestlygroovy.ophidiavenom.sounds.Death;
 import com.github.honestlygroovy.ophidiavenom.sounds.DeclineTrade;
-import com.github.honestlygroovy.ophidiavenom.sounds.DhAxe;
 import com.github.honestlygroovy.ophidiavenom.sounds.DismissRandomEvent;
 import com.github.honestlygroovy.ophidiavenom.sounds.EnteringBankPin;
 import com.github.honestlygroovy.ophidiavenom.sounds.GiveBone;
 import com.github.honestlygroovy.ophidiavenom.sounds.HairDresser;
 import com.github.honestlygroovy.ophidiavenom.sounds.KillingPlayer;
-import com.github.honestlygroovy.ophidiavenom.sounds.KillingRat;
 import com.github.honestlygroovy.ophidiavenom.sounds.LevelUp;
-import com.github.honestlygroovy.ophidiavenom.sounds.OphidiavenomWarriors;
 import com.github.honestlygroovy.ophidiavenom.sounds.Pet;
 import com.github.honestlygroovy.ophidiavenom.sounds.PetDog;
 import com.github.honestlygroovy.ophidiavenom.sounds.PkChest;
 import com.github.honestlygroovy.ophidiavenom.sounds.PrayerDown;
 import com.github.honestlygroovy.ophidiavenom.sounds.QuestCompleted;
-import com.github.honestlygroovy.ophidiavenom.sounds.RedemptionProc;
-import com.github.honestlygroovy.ophidiavenom.sounds.ReportPlayer;
-import com.github.honestlygroovy.ophidiavenom.sounds.RubyBoltProc;
-import com.github.honestlygroovy.ophidiavenom.sounds.SnowBalled;
 import com.github.honestlygroovy.ophidiavenom.sounds.ToaChestLight;
 import com.github.honestlygroovy.ophidiavenom.sounds.ToaChestOpens;
 import com.github.honestlygroovy.ophidiavenom.sounds.TobChestLight;
 import com.github.honestlygroovy.ophidiavenom.sounds.TurnOnRun;
-import com.github.honestlygroovy.ophidiavenom.sounds.Vengeance;
-import com.github.honestlygroovy.ophidiavenom.sounds.ZebakRoar;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import java.awt.Color;
@@ -55,9 +42,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.Player;
 import net.runelite.api.events.ActorDeath;
-import net.runelite.api.events.AreaSoundEffectPlayed;
 import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.CommandExecuted;
 import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameStateChanged;
@@ -65,10 +50,6 @@ import net.runelite.api.events.GameTick;
 import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.OverheadTextChanged;
-import net.runelite.api.events.PlayerDespawned;
-import net.runelite.api.events.PlayerSpawned;
-import net.runelite.api.events.ProjectileMoved;
 import net.runelite.api.events.ScriptCallbackEvent;
 import net.runelite.api.events.SoundEffectPlayed;
 import net.runelite.api.events.StatChanged;
@@ -113,19 +94,8 @@ public class OphidiavenomPlugin extends Plugin
 	@Inject
 	private OkHttpClient okHttpClient;
 
-
-	// Start of sound injections
-	@Inject
-	private RedemptionProc redemptionProc;
-
 	@Inject
 	private LevelUp levelUp;
-
-	@Inject
-	private DdsSpec ddsSpec;
-
-	@Inject
-	private AgsSpec agsSpec;
 
 	@Inject
 	private Death death;
@@ -146,31 +116,16 @@ public class OphidiavenomPlugin extends Plugin
 	private TurnOnRun turnOnRun;
 
 	@Inject
-	private ReportPlayer reportPlayer;
-
-	@Inject
 	private DeclineTrade declineTrade;
 
 	@Inject
-	private AcbSpec acbSpec;
-
-	@Inject
 	private DismissRandomEvent dismissRandomEvent;
-
-	@Inject
-	private RubyBoltProc rubyBoltProc;
 
 	@Inject
 	private EnteringBankPin enteringBankPin;
 
 	@Inject
 	private Pet pet;
-
-	@Inject
-	private DhAxe dhAxe;
-
-	@Inject
-	private KillingRat killingRat;
 
 	@Inject
 	private ToaChestLight toaChestLight;
@@ -197,41 +152,22 @@ public class OphidiavenomPlugin extends Plugin
 	private GiveBone giveBone;
 
 	@Inject
-	private SnowBalled snowBalled;
-
-	@Inject
 	private HairDresser hairDresser;
 
 	@Inject
 	private PkChest pkChest;
 
 	@Inject
-	private Vengeance vengeance;
-
-	@Inject
 	private CoxSounds coxSounds;
-
-	@Inject
-	private ZebakRoar zebakRoar;
 
 	@Inject
 	private KillingPlayer killingPlayer;
 
 	@Inject
-	private OphidiavenomWarriors ophidiavenomWarriors;
-	// End of sound injections
-
-	@Inject
 	private LivestreamManager livestreamManager;
 
 	@Inject
-	private NotificationManager notificationManager;
-
-	@Inject
 	private ChatRightClickManager chatRightClickManager;
-
-	@Inject
-	private EmoteHandler emoteHandler;
 
 	@Inject
 	private ClientToolbar clientToolbar;
@@ -253,14 +189,11 @@ public class OphidiavenomPlugin extends Plugin
 		clientThread.invoke(this::setupOldMaps);
 		achievementDiaries.setLastLoginTick(-1);
 		prayerDown.setLastLoginTick(-1);
-		emoteHandler.loadEmotes();
 		SwingUtilities.invokeLater(this::setUpOverridesNavigation);
 		executor.submit(() -> {
 			PlayerKillLineManager.Setup(okHttpClient);
 			SoundFileManager.ensureDownloadDirectoryExists();
 			SoundFileManager.downloadAllMissingSounds(okHttpClient);
-			SnowballUserManager.ensureDownloadDirectoryExists();
-			SnowballUserManager.downloadSnowballUsers(okHttpClient);
 		});
 	}
 
@@ -388,8 +321,6 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onChatMessage(ChatMessage chatMessage)
 	{
-		emoteHandler.onChatMessage(chatMessage);
-
 		if (acceptTrade.onChatMessage(chatMessage))
 		{
 			return;
@@ -399,10 +330,6 @@ public class OphidiavenomPlugin extends Plugin
 			return;
 		}
 		else if (pet.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (killingRat.onChatMessage(chatMessage))
 		{
 			return;
 		}
@@ -438,12 +365,6 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Subscribe
-	private void onOverheadTextChanged(OverheadTextChanged event)
-	{
-		emoteHandler.onOverheadTextChanged(event);
-	}
-
-	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
 		if (developerMode && config.developerLogging())
@@ -451,9 +372,7 @@ public class OphidiavenomPlugin extends Plugin
 			debugScripts.onVarbitChanged(event);
 		}
 
-		vengeance.onVarbitChanged(event);
 		turnOnRun.onVarbitChanged(event);
-		dhAxe.onVarbitChanged(event);
 		tobChestLight.onVarbitChanged(event);
 		collectionLog.onVarbitChanged(event);
 		achievementDiaries.onVarbitChanged(event);
@@ -470,10 +389,9 @@ public class OphidiavenomPlugin extends Plugin
 
 		petDog.onMenuOptionClicked(menuOptionClicked);
 		turnOnRun.onMenuOptionClicked(menuOptionClicked);
-		reportPlayer.onMenuOptionClicked(menuOptionClicked);
 		declineTrade.onMenuOptionClicked(menuOptionClicked);
 		dismissRandomEvent.onMenuOptionClicked(menuOptionClicked);
-		ophidiavenomWarriors.onMenuOptionClicked(menuOptionClicked);
+
 	}
 
 	@Subscribe
@@ -486,31 +404,7 @@ public class OphidiavenomPlugin extends Plugin
 
 		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
-		ophidiavenomWarriors.onWidgetLoaded(event);
-	}
 
-	@Subscribe
-	public void onPlayerSpawned(PlayerSpawned playerSpawned)
-	{
-		snowBalled.onPlayerSpawned(playerSpawned);
-	}
-
-	@Subscribe
-	public void onPlayerDespawned(PlayerDespawned playerDespawned)
-	{
-		snowBalled.onPlayerDespawned(playerDespawned);
-	}
-
-	@Subscribe
-	public void onNpcDespawned(NpcDespawned npcDespawned)
-	{
-		killingRat.onNpcDespawned(npcDespawned);
-	}
-
-	@Subscribe
-	public void onProjectileMoved(ProjectileMoved projectileMoved)
-	{
-		snowBalled.onProjectileMoved(projectileMoved);
 	}
 
 	@Provides
@@ -533,12 +427,6 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onInteractingChanged(InteractingChanged event)
-	{
-		killingRat.onInteractingChanged(event);
-	}
-
-	@Subscribe
 	public void onGameTick(GameTick event)
 	{
 		if (client.getGameState() != GameState.LOGGED_IN)
@@ -548,14 +436,10 @@ public class OphidiavenomPlugin extends Plugin
 		final Player local = client.getLocalPlayer();
 		int currentTick = client.getTickCount();
 
-		redemptionProc.onTick(currentTick, local);
-		ddsSpec.onTick(currentTick, local);
-		agsSpec.onTick(currentTick, local);
 		prayerDown.onGameTick(event);
 		tobChestLight.onGameTick(event);
 		coxSounds.onGameTick(event);
 		livestreamManager.onGameTick(event);
-		notificationManager.onGameTick(event);
 		chatRightClickManager.onGameTick(event);
 
 		// Should always happen after all tick events
@@ -564,29 +448,17 @@ public class OphidiavenomPlugin extends Plugin
 
 	private void cleanupTicks(final int currentTick)
 	{
-		agsSpec.cleanupTicks(currentTick);
-		ddsSpec.cleanupTicks(currentTick);
 		petDog.cleanupTicks(currentTick);
-		redemptionProc.cleanupTicks(currentTick);
+
 	}
 
-	@Subscribe
-	public void onAreaSoundEffectPlayed(AreaSoundEffectPlayed event)
-	{
-		acbSpec.onAreaSoundEffectPlayed(event);
-	}
 
 	@Subscribe
 	public void onSoundEffectPlayed(SoundEffectPlayed event)
 	{
-		rubyBoltProc.onSoundEffectPlayed(event);
 		enteringBankPin.onSoundEffectPlayed(event);
-		redemptionProc.onSoundPlayed(event);
-		agsSpec.onSoundEffectPlayed(event);
-		ddsSpec.onSoundEffectPlayed(event);
 		prayerDown.onSoundEffectPlayed(event);
-		zebakRoar.onSoundEffectPlayed(event);
-		acbSpec.onSoundEffectPlayed(event);
+
 	}
 
 	@Subscribe
@@ -615,15 +487,6 @@ public class OphidiavenomPlugin extends Plugin
 		{
 			debugScripts.onScriptCallbackEvent(scriptCallbackEvent);
 		}
-	}
-
-	@Subscribe
-	public void onCommandExecuted(CommandExecuted event)
-	{
-		emoteHandler.onCommandExecuted(event);
-		//if(event.getCommand().equals("loadwarrior")) {
-		//	ophidiavenomWarriors.onWidgetLoaded(null);
-		//}
 	}
 
 	public static int TO_GROUP(int id)

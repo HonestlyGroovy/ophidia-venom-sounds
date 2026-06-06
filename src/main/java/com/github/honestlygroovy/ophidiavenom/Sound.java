@@ -84,12 +84,7 @@ public enum Sound
 	GAMON_GO_LIVE("golive", "gamon_go_live.wav"),
 	HAIRDRESSER_SOUND_1("hairdresser", "Hairdresser_r1.wav"),
 	HAIRDRESSER_SOUND_2("hairdresser", "Hairdresser_r2.wav"),
-	HAIRDRESSER_SOUND_3("hairdresser", "Hairdresser_r3.wav"),
-
-	SNOWBALL_1("snowball", "Snowball_r1.wav"),
-	SNOWBALL_2("snowball", "Snowball_r2.wav"),
-
-	WARRIOR("warriors", "ophidiavenom_warriors.wav");
+	HAIRDRESSER_SOUND_3("hairdresser", "Hairdresser_r3.wav");
 
 	private final String resourceName;
 	private final String directory;

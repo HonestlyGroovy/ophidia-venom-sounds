@@ -45,7 +45,7 @@ public class PrayerDown
 	{
 		if (canReplacePrayerDownSound() && checkLowPrayer())
 		{
-			soundEngine.playClip(Sound.SMITED_NO_PRAYER, executor);
+			soundEngine.playClip(Sound.NO_PRAYER, executor);
 		}
 	}
 

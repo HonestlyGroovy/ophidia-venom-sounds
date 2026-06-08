@@ -5,7 +5,7 @@ public enum Sound
 
 	DEATH("death", "DyingHCIMCompleted_r1.wav"),//#2
 	COLLECTION_LOG_SLOT("collectionlog", "ColLogSlotCompleted_r1.wav"),//#3
-	SMITED_NO_PRAYER("smited", "SmitedNoPrayer.wav"),//#4
+	NO_PRAYER("noprayer", "NoPrayer.wav"),//#4
 	NEW_PET("newpet", "NewPet.wav"),//#5
 	PETTING_DOG("pettingdog", "PettingDog.wav"),//#6
 	DECLINE_TRADE("declinetrade", "DeclineTrade.wav"),//#7

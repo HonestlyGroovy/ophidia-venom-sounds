@@ -31,6 +31,7 @@ public enum Sound
 	CLICKING_PK_LOOT_CHEST("pkchest", "ClickingPkLootChest.wav"),//#26
 
 	LEVEL_UP("levelup", "LevelUpCompleted_r1.wav"),
+	LEVEL_99("level99", "Level99.wav"),
 	QUEST("quest", "QuestCompleted_r1.wav"),
 	ACHIEVEMENT_DIARY("achievementdiary", "AchievementDiary_r1.wav"),
 	EASTER_EGG_STRAYDOG_BONE("givebone", "GiveBone.wav"),

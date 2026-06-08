@@ -73,7 +73,7 @@ public class LevelUp
 			{
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, level99Message, null);
 			}
-			soundEngine.playClip(Sound.GO_LIVE, executor);
+			soundEngine.playClip(Sound.LEVEL_99, executor);
 			return;
 		}
 

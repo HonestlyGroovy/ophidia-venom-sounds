@@ -9,6 +9,7 @@ public enum Sound
 	NEW_PET("newpet", "NewPet.wav"),//#5
 	PETTING_DOG("pettingdog", "PettingDog.wav"),//#6
 	DECLINE_TRADE("declinetrade", "DeclineTrade.wav"),//#7
+	CRAB_CHECK("crabcheck", "CrabCheck.wav"),//#8
 
 	KILLING_SOMEONE_1("playerkilling", "KillingSomeone_r1.wav"),//#9
 
@@ -30,8 +31,7 @@ public enum Sound
 	QUEST("quest", "QuestCompleted_r1.wav"),
 	ACHIEVEMENT_DIARY("achievementdiary", "AchievementDiary_r1.wav"),
 	EASTER_EGG_STRAYDOG_BONE("givebone", "GiveBone.wav"),
-	GO_LIVE("golive", "go_live.wav"),
-	HAIRDRESSER_SOUND_1("hairdresser", "Hairdresser_r1.wav");
+	GO_LIVE("golive", "go_live.wav");
 
 	private final String resourceName;
 	private final String directory;

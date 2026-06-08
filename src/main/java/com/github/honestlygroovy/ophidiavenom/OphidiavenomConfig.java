@@ -73,6 +73,18 @@ public interface OphidiavenomConfig extends Config
 	String SPECS_SECTION = "specsSection";
 
 	@ConfigItem(
+			keyName = "crabCheck",
+			name = "Crab Check",
+			description = "Should OphidiaVenom let you know when the Gemstone Crab Moves?",
+			section = SPECS_SECTION,
+			position = 21
+	)
+	default boolean crabCheck()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "prayerMessage",
 		name = "Prayer Message",
 		description = "Should OphidiaVenom let you know when you run out of prayer?",

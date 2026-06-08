@@ -54,14 +54,13 @@ public class ToaChestLight
 		{
 			if (config.toaPurpleChest())
 			{
-				// TODO: Maybe change the sound if it's not your purple?
 				if (purpleIsMine)
 				{
-					soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
+					soundEngine.playClip(Sound.YOUR_PURPLE, executor);
 				}
 				else
 				{
-					soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
+					soundEngine.playClip(Sound.NOT_YOUR_PURPLE, executor);
 				}
 			}
 		}

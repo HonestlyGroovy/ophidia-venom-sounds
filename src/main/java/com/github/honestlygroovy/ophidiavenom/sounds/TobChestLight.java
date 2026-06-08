@@ -97,14 +97,13 @@ public class TobChestLight
 				{
 					if (config.tobPurpleChest())
 					{
-						// TODO: Maybe change sound if it's yours
 						if (isMine)
 						{
-							soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
+							soundEngine.playClip(Sound.YOUR_PURPLE, executor);
 						}
 						else
 						{
-							soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
+							soundEngine.playClip(Sound.NOT_YOUR_PURPLE, executor);
 						}
 					}
 				}

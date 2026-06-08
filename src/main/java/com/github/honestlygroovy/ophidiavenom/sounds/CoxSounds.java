@@ -41,6 +41,7 @@ public class CoxSounds
 	private static final Pattern SPECIAL_DROP_MESSAGE = Pattern.compile("(.+) - (.+)");
 	private int endedRaidTick = -1;
 	private boolean isWhiteLight = true;
+	private boolean isYours = false;
 
 	public boolean onChatMessage(ChatMessage chatMessage)
 	{
@@ -76,10 +77,12 @@ public class CoxSounds
 				if (dropReceiver.equals(Text.sanitize(client.getLocalPlayer().getName())))
 				{
 					isWhiteLight = false;
+					isYours = true;
 				}
 				else
 				{
 					isWhiteLight = false;
+					isYours = false;
 				}
 				return true;
 			}
@@ -101,7 +104,14 @@ public class CoxSounds
 			}
 			else if (config.coxPurpleChest())
 			{
-				soundEngine.playClip(Sound.GETTING_PURPLE_1, executor);
+				if (isYours)
+				{
+					soundEngine.playClip(Sound.YOUR_PURPLE, executor);
+				}
+				else
+				{
+					soundEngine.playClip(Sound.NOT_YOUR_PURPLE, executor);
+				}
 			}
 		}
 	}

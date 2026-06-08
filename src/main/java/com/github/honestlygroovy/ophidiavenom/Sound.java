@@ -21,8 +21,8 @@ public enum Sound
 
 	ACCEPTED_TRADE("accepttrade", "AcceptTrade.wav"),//#17
 
-	GETTING_PURPLE_1("gettingpurple", "GettingPurple_r1.wav"),//#18
-	GETTING_PURPLE_2("gettingpurple", "GettingPurple_r2.wav"),//#18
+	YOUR_PURPLE("gettingpurple", "GettingPurple_r1.wav"),//#18
+	NOT_YOUR_PURPLE("notgettingpurple", "NotGettingPurple.wav"),//#18
 
 	DISMISSING_RANDOM_EVENT("dismissrandomevent", "DismissingRandomEvent.wav"),//#20
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),//#21

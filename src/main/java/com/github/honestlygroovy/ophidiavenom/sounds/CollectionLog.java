@@ -99,7 +99,7 @@ public class CollectionLog
 			if (lastColLogSettingWarning == -1 || client.getTickCount() - lastColLogSettingWarning > 16)
 			{
 				lastColLogSettingWarning = client.getTickCount();
-				sendHighlightedMessage("Please enable \"Collection log - New addition notification\" in your game settings for C Engineer to know when to announce it! (The chat message one, pop-up doesn't matter)");
+				sendHighlightedMessage("Please enable \"Collection log - New addition notification\" in your game settings for OphidiaVenom to know when to announce it! (The chat message one, pop-up doesn't matter)");
 			}
 		}
 	}

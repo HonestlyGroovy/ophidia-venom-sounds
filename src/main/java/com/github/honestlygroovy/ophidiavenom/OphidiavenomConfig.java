@@ -86,12 +86,36 @@ public interface OphidiavenomConfig extends Config
 
 	@ConfigItem(
 		keyName = "prayerMessage",
-		name = "Prayer Message",
+		name = "No Prayer Reminder",
 		description = "Should OphidiaVenom let you know when you run out of prayer?",
 		section = SPECS_SECTION,
 		position = 28
 	)
 	default boolean prayerMessage()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "hunleffSwaps",
+			name = "Hunleff Swaps",
+			description = "Should OphidiaVenom let you know when to switch prayers at Hunleff?",
+			section = SPECS_SECTION,
+			position = 29
+	)
+	default boolean hunleffSwaps()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "yamaSwaps",
+			name = "Yama Swaps",
+			description = "Should OphidiaVenom let you know when to switch prayers at Yama?",
+			section = SPECS_SECTION,
+			position = 30
+	)
+	default boolean yamaSwaps()
 	{
 		return true;
 	}
@@ -105,16 +129,16 @@ public interface OphidiavenomConfig extends Config
 	@ConfigSection(
 		name = "PvP",
 		description = "PvP-related sounds.",
-		position = 30
+		position = 31
 	)
 	String PVP_SECTION = "pvpSection";
 
 	@ConfigItem(
 		keyName = "playerKilling",
-		name = "Player Killing",
+		name = "Player Kill",
 		description = "Should OphidiaVenom tell you something when you kill a player? This only works if you're still close to the player when they die.",
 		section = PVP_SECTION,
-		position = 31
+		position = 32
 	)
 	default boolean playerKilling()
 	{
@@ -312,18 +336,6 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "turnOnRun",
-		name = "Turn on Run",
-		description = "Should no say 'FAST! I said FAST!' when you turn your run on?",
-		section = INTERACTIONS_SECTION,
-		position = 57
-	)
-	default boolean turnOnRun()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "bankPin",
 		name = "Bank PIN",
 		description = "Should OphidiaVenom make sounds when you type in your bank PIN?",
@@ -352,17 +364,17 @@ public interface OphidiavenomConfig extends Config
 	// =========================================================================
 
 	@ConfigSection(
-		name = "Tombs of Amascut",
-		description = "All configurations regarding Tombs of Amascut.",
+		name = "Raids",
+		description = "All configurations regarding Raids",
 		position = 100
 	)
-	String TOA_SECTION = "toaSection";
+	String RAIDS = "raidsSection";
 
 	@ConfigItem(
 		keyName = "toaWhiteChest",
-		name = "TOA White Chest",
+		name = "ToA White Chest",
 		description = "When enabled, OphidiaVenom will say something if you receive a white light.",
-		section = TOA_SECTION,
+		section = RAIDS,
 		position = 101
 	)
 	default boolean toaWhiteChest()
@@ -372,9 +384,9 @@ public interface OphidiavenomConfig extends Config
 
 	@ConfigItem(
 		keyName = "toaPurpleChest",
-		name = "TOA Purple Chest",
+		name = "ToA Purple Chest",
 		description = "When enabled, OphidiaVenom will say something if you receive a purple light.",
-		section = TOA_SECTION,
+		section = RAIDS,
 		position = 102
 	)
 	default boolean toaPurpleChest()
@@ -384,9 +396,9 @@ public interface OphidiavenomConfig extends Config
 
 	@ConfigItem(
 		keyName = "enableToaPurpleChestOpens",
-		name = "Opening the Chest",
+		name = "ToA Opening Chest",
 		description = "When enabled, OphidiaVenom will say something whenever someone in your party opens the purple chest at TOA.",
-		section = TOA_SECTION,
+		section = RAIDS,
 		position = 103
 	)
 	default boolean toaPurpleChestOpens()
@@ -394,18 +406,11 @@ public interface OphidiavenomConfig extends Config
 		return true;
 	}
 
-	@ConfigSection(
-		name = "Theatre of Blood",
-		description = "All configurations regarding Theatre of Blood.",
-		position = 200
-	)
-	String TOB_SECTION = "tobSection";
-
 	@ConfigItem(
 		keyName = "tobWhiteChest",
-		name = "TOB White Chest",
+		name = "ToB White Chest",
 		description = "Should OphidiaVenom say something whenever you receive a white chest at TOB?",
-		section = TOB_SECTION,
+		section = RAIDS,
 		position = 201
 	)
 	default boolean tobWhiteChest()
@@ -415,9 +420,9 @@ public interface OphidiavenomConfig extends Config
 
 	@ConfigItem(
 		keyName = "tobPurpleChest",
-		name = "TOB Purple Chest",
+		name = "ToB Purple Chest",
 		description = "Should OphidiaVenom say something whenever you receive a purple chest at TOB?",
-		section = TOB_SECTION,
+		section = RAIDS,
 		position = 202
 	)
 	default boolean tobPurpleChest()
@@ -425,18 +430,11 @@ public interface OphidiavenomConfig extends Config
 		return true;
 	}
 
-	@ConfigSection(
-		name = "Chambers of Xeric",
-		description = "All configurations regarding Chambers of Xeric.",
-		position = 300
-	)
-	String COX_SECTION = "coxSection";
-
 	@ConfigItem(
 		keyName = "coxWhiteChest",
-		name = "COX White Chest",
+		name = "CoX White Chest",
 		description = "Should OphidiaVenom say something whenever you get a white light at COX?",
-		section = COX_SECTION,
+		section = RAIDS,
 		position = 301
 	)
 	default boolean coxWhiteChest()
@@ -446,9 +444,9 @@ public interface OphidiavenomConfig extends Config
 
 	@ConfigItem(
 		keyName = "coxPurpleChest",
-		name = "COX Purple Chest",
+		name = "CoX Purple Chest",
 		description = "Should OphidiaVenom say something whenever you get a purple light at COX?",
-		section = COX_SECTION,
+		section = RAIDS,
 		position = 302
 	)
 	default boolean coxPurpleChest()
@@ -512,7 +510,7 @@ public interface OphidiavenomConfig extends Config
 	)
 	default Color livestreamColor()
 	{
-		return Color.RED;
+		return new Color(15,68,25);
 	}
 
 	// =========================================================================

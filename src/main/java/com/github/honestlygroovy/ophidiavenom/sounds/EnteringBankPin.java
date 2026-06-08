@@ -30,7 +30,7 @@ public class EnteringBankPin
 	@Inject
 	private ScheduledExecutorService executor;
 
-	public void onSoundEffectPlayed(SoundEffectPlayed event)
+	public boolean onSoundEffectPlayed(SoundEffectPlayed event)
 	{
 		int soundId = event.getSoundId();
 
@@ -40,8 +40,9 @@ public class EnteringBankPin
 			{
 				event.consume();
 				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, executor);
-				return;
+				return true;
 			}
 		}
+		return false;
 	}
 }

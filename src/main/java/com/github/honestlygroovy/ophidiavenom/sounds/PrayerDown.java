@@ -68,12 +68,14 @@ public class PrayerDown
 		return false;
 	}
 
-	public void onSoundEffectPlayed(SoundEffectPlayed event)
+	public boolean onSoundEffectPlayed(SoundEffectPlayed event)
 	{
 		if (event.getSoundId() == SoundIds.PRAYER_DOWN.Id && canReplacePrayerDownSound())
 		{
 			event.consume();
+			return true;
 		}
+		return false;
 	}
 
 	private boolean canReplacePrayerDownSound()

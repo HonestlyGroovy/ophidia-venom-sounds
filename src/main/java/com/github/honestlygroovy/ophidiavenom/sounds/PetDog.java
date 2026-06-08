@@ -33,6 +33,7 @@ public class PetDog
 	@Inject
 	private ScheduledExecutorService executor;
 	private final String petOption = "Pet";
+	//TODO: Update to match audio file
 	private final String messageByClient = "who's a good doggy!";
 
 	private int lastPetDogTick = -1;

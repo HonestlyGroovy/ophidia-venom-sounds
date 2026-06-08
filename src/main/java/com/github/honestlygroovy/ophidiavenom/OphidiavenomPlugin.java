@@ -19,19 +19,7 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.Player;
-import net.runelite.api.events.ActorDeath;
-import net.runelite.api.events.ChatMessage;
-import net.runelite.api.events.GameObjectDespawned;
-import net.runelite.api.events.GameObjectSpawned;
-import net.runelite.api.events.GameStateChanged;
-import net.runelite.api.events.GameTick;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.ScriptCallbackEvent;
-import net.runelite.api.events.SoundEffectPlayed;
-import net.runelite.api.events.StatChanged;
-import net.runelite.api.events.VarbitChanged;
-import net.runelite.api.events.WallObjectSpawned;
-import net.runelite.api.events.WidgetLoaded;
+import net.runelite.api.events.*;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
@@ -86,9 +74,6 @@ public class OphidiavenomPlugin extends Plugin
 
 	@Inject
 	private PrayerDown prayerDown;
-
-	@Inject
-	private TurnOnRun turnOnRun;
 
 	@Inject
 	private DeclineTrade declineTrade;
@@ -146,6 +131,12 @@ public class OphidiavenomPlugin extends Plugin
 
 	@Inject
 	private HunterRumour hunterRumour;
+
+	@Inject
+	private HunleffSwaps hunleffSwaps;
+
+	@Inject
+	private YamaSwaps yamaSwaps;
 
 	@Inject
 	@Named("developerMode")
@@ -324,8 +315,6 @@ public class OphidiavenomPlugin extends Plugin
 		}
 		*/
 
-
-		turnOnRun.onVarbitChanged(event);
 		tobChestLight.onVarbitChanged(event);
 		collectionLog.onVarbitChanged(event);
 		achievementDiaries.onVarbitChanged(event);
@@ -344,7 +333,6 @@ public class OphidiavenomPlugin extends Plugin
 		 */
 
 		petDog.onMenuOptionClicked(menuOptionClicked);
-		turnOnRun.onMenuOptionClicked(menuOptionClicked);
 		declineTrade.onMenuOptionClicked(menuOptionClicked);
 		dismissRandomEvent.onMenuOptionClicked(menuOptionClicked);
 
@@ -401,9 +389,27 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onSoundEffectPlayed(SoundEffectPlayed event)
 	{
-		enteringBankPin.onSoundEffectPlayed(event);
-		prayerDown.onSoundEffectPlayed(event);
+		if (hunleffSwaps.onSoundEffectPlayed(event))
+		{
+			return;
+		}
+		else if (enteringBankPin.onSoundEffectPlayed(event))
+		{
+			return;
+		}
+		else if (prayerDown.onSoundEffectPlayed(event))
+		{
+			return;
+		}
+	}
 
+	@Subscribe
+	public void onAreaSoundEffectPlayed(AreaSoundEffectPlayed event)
+	{
+		if (yamaSwaps.onAreaSoundEffectPlayed(event))
+		{
+		return;
+		}
 	}
 
 	@Subscribe

@@ -12,6 +12,8 @@ public enum Sound
 	CRAB_CHECK("crabcheck", "CrabCheck.wav"),//#8
 	HUNTER_RUMOUR("hunterrumour", "HunterRumourCompleted.wav"),//#8
 	HUNTER_RUMOUR_NOT_COMPLETED("hunterrumour", "HunterRumourNotCompleted.wav"),//#8
+	RANGE("range", "Range.wav"),
+	MAGE("mage", "Mage.wav"),
 
 	KILLING_SOMEONE_1("playerkilling", "KillingSomeone_r1.wav"),//#9
 
@@ -26,7 +28,6 @@ public enum Sound
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),//#21
 	TOA_CHEST_OPENS("toachestopens", "ToaChestOpens.wav"),//#23
 	WHITE_LIGHT_AFTER_RAID("whitelight", "WhiteLightAfterRaid.wav"),//#24
-	TURNING_ON_RUN("turningonrun", "TurningOnRun.wav"),//#25
 	CLICKING_PK_LOOT_CHEST("pkchest", "ClickingPkLootChest.wav"),//#26
 
 	LEVEL_UP("levelup", "LevelUpCompleted_r1.wav"),

@@ -36,7 +36,6 @@ public abstract class SoundFileManager
 	private static final String SOUNDVERSION_FILENAME = "SOUNDVERSION";
 	private static final File DELETE_WARNING_FILE = new File(DOWNLOAD_DIR, DELETE_WARNING_FILENAME);
 
-	//TODO: sound deployment - update URL
 	private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/honestlygroovy/ophidia-venom-sounds/sounds");
 
 	private static boolean isUpdating = false;

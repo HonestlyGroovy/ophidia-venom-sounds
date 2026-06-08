@@ -73,6 +73,18 @@ public interface OphidiavenomConfig extends Config
 	String SPECS_SECTION = "specsSection";
 
 	@ConfigItem(
+			keyName = "crabCheck",
+			name = "Crab Check",
+			description = "Should OphidiaVenom let you know when the Gemstone Crab Moves?",
+			section = SPECS_SECTION,
+			position = 21
+	)
+	default boolean crabCheck()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "prayerMessage",
 		name = "Prayer Message",
 		description = "Should OphidiaVenom let you know when you run out of prayer?",
@@ -295,30 +307,6 @@ public interface OphidiavenomConfig extends Config
 		position = 54
 	)
 	default boolean petDog()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "giveBone",
-		name = "Give Bone",
-		description = "Should OphidiaVenom say something when you give a dog a bone?",
-		section = INTERACTIONS_SECTION,
-		position = 55
-	)
-	default boolean giveBone()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "hairDresser",
-		name = "Hairdresser",
-		description = "Should OphidiaVenom say something whenever you open the hairdresser interface in Falador?",
-		section = INTERACTIONS_SECTION,
-		position = 56
-	)
-	default boolean hairDresser()
 	{
 		return true;
 	}

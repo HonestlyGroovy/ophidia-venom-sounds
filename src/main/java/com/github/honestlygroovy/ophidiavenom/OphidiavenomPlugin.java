@@ -2,28 +2,7 @@ package com.github.honestlygroovy.ophidiavenom;
 
 
 import com.github.honestlygroovy.ophidiavenom.livestreams.LivestreamManager;
-import com.github.honestlygroovy.ophidiavenom.sounds.AcceptTrade;
-import com.github.honestlygroovy.ophidiavenom.sounds.AchievementDiaries;
-import com.github.honestlygroovy.ophidiavenom.sounds.CollectionLog;
-import com.github.honestlygroovy.ophidiavenom.sounds.CombatAchievements;
-import com.github.honestlygroovy.ophidiavenom.sounds.CoxSounds;
-import com.github.honestlygroovy.ophidiavenom.sounds.Death;
-import com.github.honestlygroovy.ophidiavenom.sounds.DeclineTrade;
-import com.github.honestlygroovy.ophidiavenom.sounds.DismissRandomEvent;
-import com.github.honestlygroovy.ophidiavenom.sounds.EnteringBankPin;
-import com.github.honestlygroovy.ophidiavenom.sounds.GiveBone;
-import com.github.honestlygroovy.ophidiavenom.sounds.HairDresser;
-import com.github.honestlygroovy.ophidiavenom.sounds.KillingPlayer;
-import com.github.honestlygroovy.ophidiavenom.sounds.LevelUp;
-import com.github.honestlygroovy.ophidiavenom.sounds.Pet;
-import com.github.honestlygroovy.ophidiavenom.sounds.PetDog;
-import com.github.honestlygroovy.ophidiavenom.sounds.PkChest;
-import com.github.honestlygroovy.ophidiavenom.sounds.PrayerDown;
-import com.github.honestlygroovy.ophidiavenom.sounds.QuestCompleted;
-import com.github.honestlygroovy.ophidiavenom.sounds.ToaChestLight;
-import com.github.honestlygroovy.ophidiavenom.sounds.ToaChestOpens;
-import com.github.honestlygroovy.ophidiavenom.sounds.TobChestLight;
-import com.github.honestlygroovy.ophidiavenom.sounds.TurnOnRun;
+import com.github.honestlygroovy.ophidiavenom.sounds.*;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import java.awt.Color;
@@ -32,7 +11,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
-import javax.swing.SwingUtilities;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +35,6 @@ import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
@@ -146,12 +124,6 @@ public class OphidiavenomPlugin extends Plugin
 	private AchievementDiaries achievementDiaries;
 
 	@Inject
-	private GiveBone giveBone;
-
-	@Inject
-	private HairDresser hairDresser;
-
-	@Inject
 	private PkChest pkChest;
 
 	@Inject
@@ -168,6 +140,9 @@ public class OphidiavenomPlugin extends Plugin
 
 	@Inject
 	private ClientToolbar clientToolbar;
+
+	@Inject
+	private CrabCheck crabCheck;
 
 	@Inject
 	@Named("developerMode")
@@ -281,7 +256,14 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onActorDeath(ActorDeath actorDeath)
 	{
-		death.onActorDeath(actorDeath);
+		if (crabCheck.onActorDeath(actorDeath))
+		{
+			return;
+		}
+		else if (death.onActorDeath(actorDeath))
+		{
+			return;
+		}
 	}
 
 
@@ -314,10 +296,6 @@ public class OphidiavenomPlugin extends Plugin
 			return;
 		}
 		else if (combatAchievements.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (giveBone.onChatMessage(chatMessage))
 		{
 			return;
 		}
@@ -378,7 +356,6 @@ public class OphidiavenomPlugin extends Plugin
 
 		 */
 
-		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
 
 	}

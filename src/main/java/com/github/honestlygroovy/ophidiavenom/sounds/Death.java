@@ -32,7 +32,7 @@ public class Death
 	private ScheduledExecutorService executor;
 
 
-	public void onActorDeath(ActorDeath actorDeath)
+	public boolean onActorDeath(ActorDeath actorDeath)
 	{
 		if (config.announceDeath() && actorDeath.getActor() == client.getLocalPlayer())
 		{
@@ -41,6 +41,8 @@ public class Death
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "It must be a glitch?!?!", null);
 			}
 			soundEngine.playClip(Sound.DEATH, executor);
+			return true;
 		}
+		return false;
 	}
 }

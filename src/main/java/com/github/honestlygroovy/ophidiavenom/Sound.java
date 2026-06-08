@@ -10,6 +10,8 @@ public enum Sound
 	PETTING_DOG("pettingdog", "PettingDog.wav"),//#6
 	DECLINE_TRADE("declinetrade", "DeclineTrade.wav"),//#7
 	CRAB_CHECK("crabcheck", "CrabCheck.wav"),//#8
+	HUNTER_RUMOUR("hunterrumour", "HunterRumourCompleted.wav"),//#8
+	HUNTER_RUMOUR_NOT_COMPLETED("hunterrumour", "HunterRumourNotCompleted.wav"),//#8
 
 	KILLING_SOMEONE_1("playerkilling", "KillingSomeone_r1.wav"),//#9
 

@@ -335,6 +335,18 @@ public interface OphidiavenomConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+			keyName = "hunterRumour",
+			name = "Hunter Rumour",
+			description = "Should OphidiaVenom make sounds complete a Hunter Rumour?",
+			section = INTERACTIONS_SECTION,
+			position = 59
+	)
+	default boolean hunterRumour()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Raids
 	// =========================================================================

@@ -145,6 +145,9 @@ public class OphidiavenomPlugin extends Plugin
 	private CrabCheck crabCheck;
 
 	@Inject
+	private HunterRumour hunterRumour;
+
+	@Inject
 	@Named("developerMode")
 	private boolean developerMode;
 
@@ -266,7 +269,6 @@ public class OphidiavenomPlugin extends Plugin
 		}
 	}
 
-
 	@Subscribe
 	public void onChatMessage(ChatMessage chatMessage)
 	{
@@ -289,7 +291,6 @@ public class OphidiavenomPlugin extends Plugin
 		else if (collectionLog.onChatMessage(chatMessage))
 		{
 			return;
-
 		}
 		else if (questCompleted.onChatMessage(chatMessage))
 		{
@@ -304,6 +305,10 @@ public class OphidiavenomPlugin extends Plugin
 			return;
 		}
 		else if (coxSounds.onChatMessage(chatMessage))
+		{
+			return;
+		}
+		else if (hunterRumour.onChatMessage(chatMessage))
 		{
 			return;
 		}

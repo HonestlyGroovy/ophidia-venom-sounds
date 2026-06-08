@@ -11,8 +11,6 @@ import com.github.honestlygroovy.ophidiavenom.sounds.Death;
 import com.github.honestlygroovy.ophidiavenom.sounds.DeclineTrade;
 import com.github.honestlygroovy.ophidiavenom.sounds.DismissRandomEvent;
 import com.github.honestlygroovy.ophidiavenom.sounds.EnteringBankPin;
-import com.github.honestlygroovy.ophidiavenom.sounds.GiveBone;
-import com.github.honestlygroovy.ophidiavenom.sounds.HairDresser;
 import com.github.honestlygroovy.ophidiavenom.sounds.KillingPlayer;
 import com.github.honestlygroovy.ophidiavenom.sounds.LevelUp;
 import com.github.honestlygroovy.ophidiavenom.sounds.Pet;
@@ -32,7 +30,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
-import javax.swing.SwingUtilities;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +54,6 @@ import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
@@ -144,12 +141,6 @@ public class OphidiavenomPlugin extends Plugin
 
 	@Inject
 	private AchievementDiaries achievementDiaries;
-
-	@Inject
-	private GiveBone giveBone;
-
-	@Inject
-	private HairDresser hairDresser;
 
 	@Inject
 	private PkChest pkChest;
@@ -317,10 +308,6 @@ public class OphidiavenomPlugin extends Plugin
 		{
 			return;
 		}
-		else if (giveBone.onChatMessage(chatMessage))
-		{
-			return;
-		}
 		else if (killingPlayer.onChatMessage(chatMessage))
 		{
 			return;
@@ -378,7 +365,6 @@ public class OphidiavenomPlugin extends Plugin
 
 		 */
 
-		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
 
 	}

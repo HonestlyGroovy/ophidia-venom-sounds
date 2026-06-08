@@ -300,30 +300,6 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "giveBone",
-		name = "Give Bone",
-		description = "Should OphidiaVenom say something when you give a dog a bone?",
-		section = INTERACTIONS_SECTION,
-		position = 55
-	)
-	default boolean giveBone()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "hairDresser",
-		name = "Hairdresser",
-		description = "Should OphidiaVenom say something whenever you open the hairdresser interface in Falador?",
-		section = INTERACTIONS_SECTION,
-		position = 56
-	)
-	default boolean hairDresser()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "turnOnRun",
 		name = "Turn on Run",
 		description = "Should no say 'FAST! I said FAST!' when you turn your run on?",

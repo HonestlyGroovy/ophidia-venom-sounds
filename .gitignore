@@ -1,12 +1,3 @@
-.gradle
-build
+.gradle/
 .idea/
-.project
-.settings/
-.classpath
-nbactions.xml
-nb-configuration.xml
-nbproject/
-src/main/resources/easter_egg_notes.txt
-bin/
-gradle/wrapper/
+build/

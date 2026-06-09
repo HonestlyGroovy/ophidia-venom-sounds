@@ -99,7 +99,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 			keyName = "hunleffSwaps",
 			name = "Hunleff Swaps",
-			description = "Should OphidiaVenom let you know when to switch prayers at Hunleff?",
+			description = "Should OphidiaVenom let you know when to switch prayers at Hunleff? (Requires Sound Effects enabled)",
 			section = SPECS_SECTION,
 			position = 29
 	)
@@ -111,7 +111,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigItem(
 			keyName = "yamaSwaps",
 			name = "Yama Swaps",
-			description = "Should OphidiaVenom let you know when to switch prayers at Yama?",
+			description = "Should OphidiaVenom let you know when to switch prayers at Yama? (Requires Area Sounds enabled)",
 			section = SPECS_SECTION,
 			position = 30
 	)
@@ -516,7 +516,7 @@ public interface OphidiavenomConfig extends Config
 	// =========================================================================
 	// Developer (always last)
 	// =========================================================================
-
+/*
 	@ConfigSection(
 		name = "Developer",
 		description = "Developer mode configurations.",
@@ -524,7 +524,7 @@ public interface OphidiavenomConfig extends Config
 		closedByDefault = true
 	)
 	String DEVELOPER_SECTION = "developerSection";
-/*
+
 	@ConfigItem(
 		keyName = "developerLogging",
 		name = "Developer Logging",

@@ -16,7 +16,7 @@ import okhttp3.Response;
 
 public class PlayerKillLineManager
 {
-	private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/dappermickie/ophidiavenom-sounds/playerkillpatterns");
+	private static final HttpUrl RAW_GITHUB = HttpUrl.parse("https://raw.githubusercontent.com/HonestlyGroovy/ophidiavenom-sounds/playerkillpatterns");
 	private static final String USERS_FILENAME = "pklines.txt";
 	private static Pattern[] patterns = null;
 

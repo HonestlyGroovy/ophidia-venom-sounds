@@ -164,7 +164,7 @@ public interface OphidiavenomConfig extends Config
 	@ConfigSection(
 		name = "Achievements & Milestones",
 		description = "Sounds for level ups, quests, achievements, drops, and death.",
-		position = 40
+		position = 34
 	)
 	String ACHIEVEMENTS_SECTION = "achievementsSection";
 
@@ -173,7 +173,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Level Ups",
 		description = "Should OphidiaVenom announce when you gain a level in a skill?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 41
+		position = 35
 	)
 	default boolean announceLevelUp()
 	{
@@ -185,7 +185,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Include Virtual Level Ups",
 		description = "Should OphidiaVenom announce when you gain a virtual level above 99 in a skill?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 42
+		position = 36
 	)
 	default boolean announceLevelUpIncludesVirtual()
 	{
@@ -197,7 +197,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Level 99",
 		description = "Should OphidiaVenom announce when you reach level 99 in a skill? This replaces the standard level-up sound for that milestone.",
 		section = ACHIEVEMENTS_SECTION,
-		position = 43
+		position = 37
 	)
 	default boolean announceLevel99()
 	{
@@ -209,7 +209,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Quest Completions",
 		description = "Should OphidiaVenom announce when you complete a quest?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 44
+		position = 38
 	)
 	default boolean announceQuestCompletion()
 	{
@@ -221,7 +221,7 @@ public interface OphidiavenomConfig extends Config
 		name = "New Collection Log Entry",
 		description = "Should OphidiaVenom announce when you fill in a new slot in your collection log? This relies on you having chat messages enabled in the game settings, including the popup option.",
 		section = ACHIEVEMENTS_SECTION,
-		position = 45
+		position = 39
 	)
 	default boolean announceCollectionLog()
 	{
@@ -233,7 +233,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Completed Achievement Diaries",
 		description = "Should OphidiaVenom announce when you complete a new achievement diary?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 46
+		position = 40
 	)
 	default boolean announceAchievementDiary()
 	{
@@ -245,9 +245,21 @@ public interface OphidiavenomConfig extends Config
 		name = "Completed Combat Achievement Tasks",
 		description = "Should OphidiaVenom announce when you complete a new combat achievement task?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 47
+		position = 41
 	)
 	default boolean announceCombatAchievement()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "announceSlayerCompletion",
+			name = "Completed Slayer Tasks",
+			description = "Should OphidiaVenom announce when you complete a Slayer task?",
+			section = ACHIEVEMENTS_SECTION,
+			position = 42
+	)
+	default boolean announceSlayerCompletion()
 	{
 		return true;
 	}
@@ -257,7 +269,7 @@ public interface OphidiavenomConfig extends Config
 		name = "When You Die",
 		description = "Should OphidiaVenom say something when you die?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 48
+		position = 43
 	)
 	default boolean announceDeath()
 	{
@@ -269,7 +281,7 @@ public interface OphidiavenomConfig extends Config
 		name = "Received Pet",
 		description = "Should OphidiaVenom say something whenever you receive a pet?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 49
+		position = 44
 	)
 	default boolean receivedPet()
 	{

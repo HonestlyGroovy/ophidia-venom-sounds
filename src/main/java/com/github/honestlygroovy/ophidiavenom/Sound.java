@@ -20,7 +20,7 @@ public enum Sound
 	MAGE("Mage", "Mage.wav"),
 	NEW_PET("NewPet", "NewPet.wav"),//#5
 	NO_PRAYER("NoPrayer", "NoPrayer.wav"),//#4
-	PETTING_DOG("PettingDog", "PettingDog.wav"),//#6
+	PETTING_DOG("PetDog", "PetDog.wav"),//#6
 	CLICKING_PK_LOOT_CHEST("PKChest", "PKChest.wav"),//#26
 	KILLING_SOMEONE_1("PKKill", "PKKill.wav"),//#9
 	YOUR_PURPLE("PurpleChestYours", "PurpleChestYours.wav"),//#18

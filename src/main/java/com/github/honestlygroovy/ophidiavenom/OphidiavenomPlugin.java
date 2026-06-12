@@ -139,6 +139,9 @@ public class OphidiavenomPlugin extends Plugin
 	private YamaSwaps yamaSwaps;
 
 	@Inject
+	private SlayerCompleted slayerCompleted;
+
+	@Inject
 	@Named("developerMode")
 	private boolean developerMode;
 
@@ -300,6 +303,10 @@ public class OphidiavenomPlugin extends Plugin
 			return;
 		}
 		else if (hunterRumour.onChatMessage(chatMessage))
+		{
+			return;
+		}
+		else if (slayerCompleted.onChatMessage(chatMessage))
 		{
 			return;
 		}

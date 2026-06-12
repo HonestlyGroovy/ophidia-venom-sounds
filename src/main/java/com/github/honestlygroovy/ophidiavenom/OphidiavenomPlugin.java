@@ -439,6 +439,12 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Subscribe
+	private void onWallObjectDespawned(WallObjectDespawned event)
+	{
+		toaChestLight.onWallObjectDespawned(event);
+	}
+
+	@Subscribe
 	public void onScriptCallbackEvent(ScriptCallbackEvent scriptCallbackEvent)
 	{
 		/*

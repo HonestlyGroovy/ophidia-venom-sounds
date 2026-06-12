@@ -1,4 +1,4 @@
-# Ophidiavenom Plugin [![Plugin Installs](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/installs/plugin/ophidiavenom)](https://runelite.net/plugin-hub/HonestlyGroovy) [![Plugin Rank](https://img.shields.io/endpoint?url=https://api.runelite.net/pluginhub/shields/rank/plugin/ophidiavenom)](https://runelite.net/plugin-hub/show/ophidiavenom)
+# Ophidiavenom Plugin 
 
 ##### A plugin for [RuneLite](https://runelite.net/)
 
@@ -32,11 +32,6 @@ First and foremost we have implemented a sound system that consists of a [sound 
 
 Sounds are downloaded to the local file system instead of being 'baked in' to the plugin build, allowing for further
 expansion in the future while also 'supporting' user-swapped sounds for pre-existing events/actions (please refer to the warning section of `Customising your sounds`).
-
-#### Player kill system
-
-Because the OSRS team adds new player kill lines from time to time, we've chosen to add a system to update the possible player kill lines without having to push a new plugin. This system uses the [Player kill line manager](https://github.com/HonestlyGroovy/ophidia-venom-sounds/blob/master/src/main/java/com/github/honestlygroovy/ophidiavenom/PlayerKillLineManager.java). This manager downloads/updates a [list of possible kill lines](https://github.com/HonestlyGroovy/ophidia-venom-sounds/blob/playerkillpatterns/pklines.txt). This system is then used in the `Killing player` sound to determine whether or not you killed someone.
-
 
 ### Planned / Work In Progress expansions
 

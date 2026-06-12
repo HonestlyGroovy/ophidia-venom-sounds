@@ -35,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LivestreamManager
 {
-	private static final Duration LIVE_SOUND_MAX_AGE = Duration.ofMinutes(3);
+	private static final Duration LIVE_SOUND_MAX_AGE = Duration.ofMinutes(180);
 
 	private Livestream livestream = null;
 	private int lastChecked = -1;
@@ -97,7 +97,7 @@ public class LivestreamManager
 		// Keep the last livestream snapshot so hop/login doesn't count as a live transition.
 		lastChecked = -1;
 		lastSentMessage = -1;
-		suppressLiveTransitionSound = true;
+		//suppressLiveTransitionSound = true;
 	}
 	public static long extract(String text, String regex)
 	{
@@ -233,8 +233,6 @@ public class LivestreamManager
 		final boolean wasLive = previousLivestream != null && previousLivestream.isLive();
 		final boolean isLive = newLivestream.isLive();
 		final boolean becameOffline = previousLivestream != null && wasLive && !isLive;
-		final boolean wasSuppressingLiveSound = suppressLiveTransitionSound;
-		suppressLiveTransitionSound = false;
 
 		livestream = newLivestream;
 		clientThread.invokeLater(() -> {
@@ -242,16 +240,17 @@ public class LivestreamManager
 			{
 				sendLiveLivestreamMessage(true);
 			}
-
-			if (shouldPlayLiveSound(previousLivestream, newLivestream, wasSuppressingLiveSound))
+			if (shouldPlayLiveSound(previousLivestream, newLivestream, suppressLiveTransitionSound))
 			{
 				offlineAnnouncementSent = false;
+				suppressLiveTransitionSound = true;
 				livestreamLiveSound.playSound();
 			}
 			else if (becameOffline && !offlineAnnouncementSent)
 			{
 				sendOfflineLivestreamMessage();
 				offlineAnnouncementSent = true;
+				suppressLiveTransitionSound = false;
 			}
 		});
 	}

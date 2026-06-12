@@ -47,15 +47,19 @@ public class CoxSounds
 	{
 		if (!config.coxWhiteChest() && !config.coxPurpleChest())
 		{
+			log.warn("***************1");
 			return false;
 		}
+
 		if (client.getLocalPlayer() == null || client.getLocalPlayer().getName() == null)
 		{
+			log.warn("***************2");
 			return false;
 		}
 
 		if (chatMessage.getType() == ChatMessageType.FRIENDSCHATNOTIFICATION)
 		{
+			log.warn("***************3");
 			String message = Text.removeTags(chatMessage.getMessage());
 
 			if (message.contains("your raid is complete!"))
@@ -92,7 +96,7 @@ public class CoxSounds
 			}
 			log.warn("White Light");
 		}
-
+		log.warn("***************4");
 		return false;
 	}
 

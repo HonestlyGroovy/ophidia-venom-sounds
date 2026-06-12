@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.WallObject;
+import net.runelite.api.events.WallObjectDespawned;
 import net.runelite.api.events.WallObjectSpawned;
 
 @Singleton
@@ -33,11 +34,17 @@ public class ToaChestLight
 	private static final int WALL_OBJECT_ID_SARCOPHAGUS = 46221;
 
 	private static final int[] VARBIT_MULTILOC_IDS_CHEST = new int[]{
-		14356, 14357, 14358, 14359, 14360, 14370, 14371, 14372
+			14356, 14357, 14358, 14359, 14360, 14370, 14371, 14372
 	};
 
 	private boolean sarcophagusIsPurple;
 	private boolean purpleIsMine = true;
+	private boolean whiteLightSoundPlayed = false;
+
+	public void onWallObjectDespawned(final WallObjectDespawned event)
+	{
+		whiteLightSoundPlayed = false;
+	}
 
 	public void onWallObjectSpawned(final WallObjectSpawned event)
 	{
@@ -48,6 +55,8 @@ public class ToaChestLight
 			return;
 		}
 
+		log.warn(String.valueOf(wallObject.getId()));
+		System.out.println(wallObject.getId());
 		parseVarbits();
 
 		if (sarcophagusIsPurple)
@@ -66,6 +75,10 @@ public class ToaChestLight
 		}
 		else if (config.toaWhiteChest())
 		{
+			if (whiteLightSoundPlayed) {
+				return;
+			}
+			whiteLightSoundPlayed = true;
 			soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
 		}
 	}

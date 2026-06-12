@@ -38,8 +38,7 @@ public class Death
 		{
 			if (config.showChatMessages())
 			{
-				//TODO: Change text to match sound file
-				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "It must be a glitch?!?!", null);
+				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Do better.", null);
 			}
 			soundEngine.playClip(Sound.DEATH, executor);
 			return true;

@@ -12,7 +12,6 @@ public enum Sound
 	DISMISSING_RANDOM_EVENT("Dismiss", "Dismiss.wav"),//#20
 	TOA_CHEST_OPENS("GoodLuck", "GoodLuck.wav"),//#23
 	HUNTER_RUMOUR("HunterRumourCompleted", "HunterRumourCompleted.wav"),//#8
-	//TODO: Record Hunter Rumour Not Completed
 	HUNTER_RUMOUR_NOT_COMPLETED("HunterRumourNotCompleted", "HunterRumourNotCompleted.wav"),//#8
 	GO_LIVE("ImLive", "ImLive.wav"),
 	LEVEL_99("Level99", "Level99.wav"),
@@ -26,11 +25,9 @@ public enum Sound
 	YOUR_PURPLE("PurpleChestYours", "PurpleChestYours.wav"),//#18
 	QUEST("QuestCompleted", "QuestCompleted.wav"),
 	RANGE("Range", "Range.wav"),
-	//TODO: Record Slayer Task Completed
 	SLAYER_TASK("SlayerTaskCompleted", "SlayerTaskCompleted.wav"),
 	TYPING_IN_BANKPIN("Snap", "Snap.wav"),//#21
 	WHITE_LIGHT_AFTER_RAID("WhiteChest", "WhiteChest.wav"),//#24
-	//TODO: Record Not Your Purple
 	NOT_YOUR_PURPLE("PurpleChestNotYours", "PurpleChestNotYours.wav");//#18
 
 	private final String resourceName;

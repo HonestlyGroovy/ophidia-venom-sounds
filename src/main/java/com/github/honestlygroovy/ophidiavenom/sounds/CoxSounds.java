@@ -62,11 +62,13 @@ public class CoxSounds
 			{
 				isWhiteLight = true;
 				endedRaidTick = client.getTickCount();
-				return true;
+				log.warn("***************");
+				log.warn(String.valueOf(endedRaidTick));
 			}
-
+			log.warn("After Raid tick check");
 			Matcher matcher = SPECIAL_DROP_MESSAGE.matcher(message);
-
+			log.warn(String.valueOf(matcher.find()));
+			log.warn("**********************");
 			if (matcher.find())
 			{
 				final String dropReceiver = Text.sanitize(matcher.group(1)).trim();
@@ -76,16 +78,19 @@ public class CoxSounds
 				// We might want to play a different sound if you're the one receiving the purple
 				if (dropReceiver.equals(Text.sanitize(client.getLocalPlayer().getName())))
 				{
+					log.warn("Purple Yours");
 					isWhiteLight = false;
 					isYours = true;
 				}
 				else
 				{
+					log.warn("Purple Not Yours");
 					isWhiteLight = false;
 					isYours = false;
 				}
 				return true;
 			}
+			log.warn("White Light");
 		}
 
 		return false;

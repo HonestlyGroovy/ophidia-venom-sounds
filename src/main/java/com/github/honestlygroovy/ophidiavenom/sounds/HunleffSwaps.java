@@ -36,6 +36,11 @@ public class HunleffSwaps
 
         if (config.hunleffSwaps())
         {
+            if (soundId == SoundIds.HUNLEFF_SWAP.Id)
+            {
+                event.consume();
+                return true;
+            }
             if (soundId == SoundIds.HUNLEFF_RANGE.Id)
             {
                 event.consume();

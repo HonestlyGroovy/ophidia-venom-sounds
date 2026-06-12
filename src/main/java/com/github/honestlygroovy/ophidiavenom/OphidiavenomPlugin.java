@@ -278,10 +278,6 @@ public class OphidiavenomPlugin extends Plugin
 		{
 			return;
 		}
-		else if (chatMessage.getType() != ChatMessageType.GAMEMESSAGE && chatMessage.getType() != ChatMessageType.SPAM)
-		{
-			return;
-		}
 		else if (collectionLog.onChatMessage(chatMessage))
 		{
 			return;
@@ -307,6 +303,10 @@ public class OphidiavenomPlugin extends Plugin
 			return;
 		}
 		else if (slayerCompleted.onChatMessage(chatMessage))
+		{
+			return;
+		}
+		else if (chatMessage.getType() != ChatMessageType.GAMEMESSAGE && chatMessage.getType() != ChatMessageType.SPAM)
 		{
 			return;
 		}

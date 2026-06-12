@@ -15,7 +15,7 @@ public enum Sound
 	HUNTER_RUMOUR_NOT_COMPLETED("HunterRumourNotCompleted", "HunterRumourNotCompleted.wav"),//#8
 	GO_LIVE("ImLive", "ImLive.wav"),
 	LEVEL_99("Level99", "Level99.wav"),
-	LEVEL_UP("levelX", "LevelX.wav"),
+	LEVEL_UP("LevelX", "LevelX.wav"),
 	MAGE("Mage", "Mage.wav"),
 	NEW_PET("NewPet", "NewPet.wav"),//#5
 	NO_PRAYER("NoPrayer", "NoPrayer.wav"),//#4

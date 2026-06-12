@@ -18,7 +18,6 @@ import net.runelite.api.events.ChatMessage;
 @Slf4j
 public class QuestCompleted
 {
-
 	@Inject
 	private Client client;
 

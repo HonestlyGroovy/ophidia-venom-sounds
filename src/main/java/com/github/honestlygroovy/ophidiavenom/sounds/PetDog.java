@@ -40,6 +40,7 @@ public class PetDog
 
 	public boolean onChatMessage(ChatMessage chatMessage)
 	{
+
 		int currentTick = client.getTickCount();
 		Player local = client.getLocalPlayer();
 		// Petting the dog sound, only play sound when message is sent by local player within 15ticks of petting the dog

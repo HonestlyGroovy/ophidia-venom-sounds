@@ -63,6 +63,7 @@ public class CoxSounds
 			{
 				isWhiteLight = true;
 				endedRaidTick = client.getTickCount();
+				return true;
 			}
 			Matcher matcher = SPECIAL_DROP_MESSAGE.matcher(message);
 			if (matcher.find())

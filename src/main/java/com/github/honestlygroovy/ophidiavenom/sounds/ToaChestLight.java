@@ -9,9 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.WallObject;
-import net.runelite.api.events.WallObjectDespawned;
-import net.runelite.api.events.WallObjectSpawned;
+import net.runelite.api.events.GameObjectSpawned;
 
 @Singleton
 @Slf4j
@@ -31,7 +29,8 @@ public class ToaChestLight
 
 	private static final int VARBIT_VALUE_CHEST_KEY = 2;
 	private static final int VARBIT_ID_SARCOPHAGUS = 14373;
-	private static final int WALL_OBJECT_ID_SARCOPHAGUS = 46221;
+
+	private static final int GAME_ID_SARCOPHAGUS = 46220;
 
 	private static final int[] VARBIT_MULTILOC_IDS_CHEST = new int[]{
 			14356, 14357, 14358, 14359, 14360, 14370, 14371, 14372
@@ -39,24 +38,19 @@ public class ToaChestLight
 
 	private boolean sarcophagusIsPurple;
 	private boolean purpleIsMine = true;
-	private boolean whiteLightSoundPlayed = false;
 
-	public void onWallObjectDespawned(final WallObjectDespawned event)
+	public void onGameObjectSpawned(GameObjectSpawned e)
 	{
-		whiteLightSoundPlayed = false;
-	}
-
-	public void onWallObjectSpawned(final WallObjectSpawned event)
-	{
-		final WallObject wallObject = event.getWallObject();
-
-		if ((!config.toaPurpleChest() && !config.toaWhiteChest()) || wallObject.getId() != WALL_OBJECT_ID_SARCOPHAGUS)
+		if ((!config.toaPurpleChest() && !config.toaWhiteChest()) || e.getGameObject().getId() != GAME_ID_SARCOPHAGUS)
 		{
 			return;
 		}
 
-		log.warn(String.valueOf(wallObject.getId()));
+		log.debug("Sarcophagus spawned");
+		log.debug(String.valueOf(e.getGameObject().getId()));
 		parseVarbits();
+		log.debug(String.valueOf(sarcophagusIsPurple));
+		log.debug(String.valueOf(purpleIsMine));
 
 		if (sarcophagusIsPurple)
 		{
@@ -64,20 +58,19 @@ public class ToaChestLight
 			{
 				if (purpleIsMine)
 				{
+					log.debug("Playing ToA your purple chest");
 					soundEngine.playClip(Sound.YOUR_PURPLE, executor);
 				}
 				else
 				{
+					log.debug("Playing ToA not your purple chest");
 					soundEngine.playClip(Sound.NOT_YOUR_PURPLE, executor);
 				}
 			}
 		}
 		else if (config.toaWhiteChest())
 		{
-			if (whiteLightSoundPlayed) {
-				return;
-			}
-			whiteLightSoundPlayed = true;
+			log.debug("Playing ToA white chest");
 			soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
 		}
 	}

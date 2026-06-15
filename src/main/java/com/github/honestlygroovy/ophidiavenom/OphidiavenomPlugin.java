@@ -420,15 +420,10 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onWallObjectSpawned(final WallObjectSpawned event)
-	{
-		toaChestLight.onWallObjectSpawned(event);
-	}
-
-	@Subscribe
 	private void onGameObjectSpawned(GameObjectSpawned event)
 	{
 		toaChestOpens.onGameObjectSpawned(event);
+		toaChestLight.onGameObjectSpawned(event);
 		tobChestLight.onGameObjectSpawned(event);
 	}
 
@@ -436,12 +431,6 @@ public class OphidiavenomPlugin extends Plugin
 	private void onGameObjectDespawned(GameObjectDespawned event)
 	{
 		tobChestLight.onGameObjectDespawned(event);
-	}
-
-	@Subscribe
-	private void onWallObjectDespawned(WallObjectDespawned event)
-	{
-		toaChestLight.onWallObjectDespawned(event);
 	}
 
 	@Subscribe

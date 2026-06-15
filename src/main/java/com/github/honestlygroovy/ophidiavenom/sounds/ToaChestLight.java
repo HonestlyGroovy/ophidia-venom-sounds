@@ -56,7 +56,6 @@ public class ToaChestLight
 		}
 
 		log.warn(String.valueOf(wallObject.getId()));
-		System.out.println(wallObject.getId());
 		parseVarbits();
 
 		if (sarcophagusIsPurple)

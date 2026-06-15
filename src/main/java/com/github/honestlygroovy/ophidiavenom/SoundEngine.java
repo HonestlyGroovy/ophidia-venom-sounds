@@ -2,8 +2,6 @@ package com.github.honestlygroovy.ophidiavenom;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.audio.AudioPlayer;
 
@@ -56,7 +54,7 @@ public class SoundEngine
 		{
 			audioPlayer.play(file, gain);
 		}
-		catch (IOException | UnsupportedAudioFileException | LineUnavailableException exception)
+		catch (Exception exception)
 		{
 			log.warn("Failed to preview sound {}", file.getName(), exception);
 		}
@@ -86,18 +84,11 @@ public class SoundEngine
 		{
 			log.warn("Sound file not found for " + sound, e);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			log.warn("Failed to play Ophidiavenom sound " + sound, e);
 		}
-		catch (UnsupportedAudioFileException e)
-		{
-			log.warn("Failed to play Ophidiavenom sound " + sound, e);
-		}
-		catch (LineUnavailableException e)
-		{
-			log.warn("Failed to play Ophidiavenom sound " + sound, e);
-		}
+
 	}
 
 	public void close()

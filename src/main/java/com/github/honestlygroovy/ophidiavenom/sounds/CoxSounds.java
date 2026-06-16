@@ -90,7 +90,7 @@ public class CoxSounds
 
 	public void onGameTick(GameTick event)
 	{
-		if (endedRaidTick != -1 && client.getTickCount() - endedRaidTick == 2)
+		if (endedRaidTick != -1 && client.getTickCount() - endedRaidTick == 1)
 		{
 			if (isWhiteLight)
 			{

@@ -3,6 +3,7 @@ package com.github.honestlygroovy.ophidiavenom.livestreams;
 import com.github.honestlygroovy.ophidiavenom.ChatRightClickManager;
 import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.RightClickAction;
+import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.sounds.LivestreamLiveSound;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -22,6 +23,8 @@ import net.runelite.client.chat.ChatColorType;
 import net.runelite.client.chat.ChatMessageBuilder;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -371,5 +374,14 @@ public class LivestreamManager
 		{
 			lastSentMessage = -1;
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.livestreamPlaySound() && configChanged.getKey().equals("livestreamPlaySound")) {
+			livestreamLiveSound.playSound();
+			return true;
+		}
+		return false;
 	}
 }

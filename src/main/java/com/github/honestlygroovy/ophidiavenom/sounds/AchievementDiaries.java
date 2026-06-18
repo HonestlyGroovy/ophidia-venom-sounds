@@ -21,6 +21,8 @@ import static net.runelite.api.Varbits.DIARY_KARAMJA_HARD;
 import static net.runelite.api.Varbits.DIARY_KARAMJA_MEDIUM;
 import net.runelite.api.annotations.Varbit;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -118,5 +120,14 @@ public class AchievementDiaries
 			int value = client.getVarbitValue(diary);
 			oldAchievementDiaries.put(diary, value);
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.announceAchievementDiary() && configChanged.getKey().equals("announceAchievementDiary")) {
+			soundEngine.playClip(Sound.ACHIEVEMENT_DIARY, executor);
+			return true;
+		}
+		return false;
 	}
 }

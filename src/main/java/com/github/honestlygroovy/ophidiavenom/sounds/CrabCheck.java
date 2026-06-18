@@ -10,6 +10,8 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 
 import net.runelite.api.events.ActorDeath;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import java.util.Objects;
@@ -44,6 +46,15 @@ public class CrabCheck {
                 soundEngine.playClip(Sound.CRAB_CHECK, executor);
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean onConfigChanged (ConfigChanged configChanged)
+    {
+        if (config.crabCheck() && configChanged.getKey().equals("crabCheck")) {
+            soundEngine.playClip(Sound.CRAB_CHECK, executor);
+            return true;
         }
         return false;
     }

@@ -15,6 +15,7 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.GameTick;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 @Singleton
@@ -111,5 +112,18 @@ public class CoxSounds
 				}
 			}
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.coxPurpleChest() && configChanged.getKey().equals("coxPurpleChest")) {
+			soundEngine.playClip(Sound.YOUR_PURPLE, executor);
+			return true;
+		}
+		else if (config.coxWhiteChest() && configChanged.getKey().equals("coxWhiteChest")) {
+			soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
+			return true;
+		}
+		return false;
 	}
 }

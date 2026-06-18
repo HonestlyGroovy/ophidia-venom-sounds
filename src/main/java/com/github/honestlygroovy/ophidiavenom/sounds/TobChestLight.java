@@ -20,6 +20,8 @@ import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -176,5 +178,18 @@ public class TobChestLight
 			isPurple = false;
 			loadedObjectCount--;
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.tobPurpleChest() && configChanged.getKey().equals("tobPurpleChest")) {
+			soundEngine.playClip(Sound.YOUR_PURPLE, executor);
+			return true;
+		}
+		else if (config.tobWhiteChest() && configChanged.getKey().equals("tobWhiteChest")) {
+			soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
+			return true;
+		}
+		return false;
 	}
 }

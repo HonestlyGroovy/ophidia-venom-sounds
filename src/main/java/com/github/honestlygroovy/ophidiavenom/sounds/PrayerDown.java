@@ -10,6 +10,8 @@ import net.runelite.api.Client;
 import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.SoundEffectPlayed;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -91,5 +93,14 @@ public class PrayerDown
 		}
 
 		return true;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.prayerMessage() && configChanged.getKey().equals("prayerMessage")) {
+			soundEngine.playClip(Sound.NO_PRAYER, executor);
+			return true;
+		}
+		return false;
 	}
 }

@@ -10,6 +10,7 @@ import net.runelite.api.MenuAction;
 import net.runelite.api.Player;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
@@ -81,5 +82,14 @@ public class PetDog
 		{
 			lastPetDogTick = -1;
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.petDog() && configChanged.getKey().equals("petDog")) {
+			soundEngine.playClip(Sound.PETTING_DOG, executor);
+			return true;
+		}
+		return false;
 	}
 }

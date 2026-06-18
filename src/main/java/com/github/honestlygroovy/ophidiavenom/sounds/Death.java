@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ActorDeath;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,6 +42,15 @@ public class Death
 			{
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, OPHIDIAVENOM, "Do better.", null);
 			}
+			soundEngine.playClip(Sound.DEATH, executor);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.announceDeath() && configChanged.getKey().equals("announceDeath")) {
 			soundEngine.playClip(Sound.DEATH, executor);
 			return true;
 		}

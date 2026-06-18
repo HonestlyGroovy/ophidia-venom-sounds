@@ -9,6 +9,8 @@ import net.runelite.api.Client;
 import net.runelite.api.Experience;
 import net.runelite.api.Skill;
 import net.runelite.api.events.StatChanged;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -98,5 +100,18 @@ public class LevelUp
 		{
 			oldExperience.put(skill, client.getSkillExperience(skill));
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.announceLevelUp() && configChanged.getKey().equals("announceLevelUp")) {
+			soundEngine.playClip(Sound.LEVEL_UP, executor);
+			return true;
+		}
+		else if (config.announceLevel99() && configChanged.getKey().equals("announceLevel99")) {
+			soundEngine.playClip(Sound.LEVEL_99, executor);
+			return true;
+		}
+		return false;
 	}
 }

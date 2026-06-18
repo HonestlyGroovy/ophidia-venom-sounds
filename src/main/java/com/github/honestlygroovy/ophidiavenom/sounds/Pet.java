@@ -12,6 +12,8 @@ import net.runelite.api.events.ChatMessage;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;
+
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 @Singleton
@@ -58,5 +60,14 @@ public class Pet
 	public int getReceivedPetTick()
 	{
 		return receivedPetTick;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.receivedPet() && configChanged.getKey().equals("receivedPet")) {
+			soundEngine.playClip(Sound.NEW_PET, executor);
+			return true;
+		}
+		return false;
 	}
 }

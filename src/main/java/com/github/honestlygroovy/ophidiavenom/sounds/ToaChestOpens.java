@@ -10,6 +10,8 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.GameObjectSpawned;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -40,5 +42,14 @@ public class ToaChestOpens
 
 		// The sarcophagus spawns as the player starts looting the chest
 		soundEngine.playClip(Sound.TOA_CHEST_OPENS, executor);
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.toaPurpleChestOpens() && configChanged.getKey().equals("toaPurpleChestOpens")) {
+			soundEngine.playClip(Sound.TOA_CHEST_OPENS, executor);
+			return true;
+		}
+		return false;
 	}
 }

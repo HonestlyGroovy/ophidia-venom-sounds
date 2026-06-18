@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -58,5 +60,14 @@ public class DeclineTrade
 				soundEngine.playClip(Sound.DECLINE_TRADE, executor);
 			}
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.declineTrade() && configChanged.getKey().equals("declineTrade")) {
+			soundEngine.playClip(Sound.DECLINE_TRADE, executor);
+			return true;
+		}
+		return false;
 	}
 }

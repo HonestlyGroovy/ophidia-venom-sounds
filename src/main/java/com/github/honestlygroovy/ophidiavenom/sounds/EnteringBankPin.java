@@ -8,6 +8,8 @@ import com.github.honestlygroovy.ophidiavenom.SoundIds;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.SoundEffectPlayed;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -42,6 +44,15 @@ public class EnteringBankPin
 				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, executor);
 				return true;
 			}
+		}
+		return false;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.bankPin() && configChanged.getKey().equals("bankPin")) {
+			soundEngine.playClip(Sound.TYPING_IN_BANKPIN, executor);
+			return true;
 		}
 		return false;
 	}

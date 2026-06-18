@@ -12,6 +12,7 @@ import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.VarbitChanged;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
@@ -87,5 +88,14 @@ public class KillingPlayer
 	private void playSound(boolean sendMessage)
 	{
 		soundEngine.playClip(Sound.KILLING_SOMEONE_1, executor);
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.playerKilling() && configChanged.getKey().equals("playerKilling")) {
+			soundEngine.playClip(Sound.KILLING_SOMEONE_1, executor);
+			return true;
+		}
+		return false;
 	}
 }

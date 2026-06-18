@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -45,5 +47,14 @@ public class CombatAchievements
 		}
 		soundEngine.playClip(Sound.COMBAT_TASK, executor);
 		return true;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.announceCombatAchievement() && configChanged.getKey().equals("announceCombatAchievement")) {
+			soundEngine.playClip(Sound.COMBAT_TASK, executor);
+			return true;
+		}
+		return false;
 	}
 }

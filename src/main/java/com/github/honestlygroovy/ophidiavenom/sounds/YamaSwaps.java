@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.AreaSoundEffectPlayed;
 import net.runelite.api.events.SoundEffectPlayed;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -49,6 +51,19 @@ public class YamaSwaps
                 soundEngine.playClip(Sound.MAGE, executor);
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean onConfigChanged (ConfigChanged configChanged)
+    {
+        if (config.yamaSwaps() && configChanged.getKey().equals("yamaSwaps")) {
+            soundEngine.playClip(Sound.RANGE, executor);
+            return true;
+        }
+        else if (!config.yamaSwaps() && configChanged.getKey().equals("yamaSwaps")) {
+            soundEngine.playClip(Sound.MAGE, executor);
+            return true;
         }
         return false;
     }

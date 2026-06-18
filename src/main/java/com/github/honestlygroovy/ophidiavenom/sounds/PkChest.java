@@ -14,6 +14,7 @@ import net.runelite.api.Client;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 @Singleton
@@ -62,5 +63,14 @@ public class PkChest
 				soundEngine.playClip(Sound.CLICKING_PK_LOOT_CHEST, executor);
 			}
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.pkChest() && configChanged.getKey().equals("pkChest")) {
+			soundEngine.playClip(Sound.CLICKING_PK_LOOT_CHEST, executor);
+			return true;
+		}
+		return false;
 	}
 }

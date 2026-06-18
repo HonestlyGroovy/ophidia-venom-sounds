@@ -407,7 +407,7 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "enableToaPurpleChestOpens",
+		keyName = "toaPurpleChestOpens",
 		name = "ToA Opening Chest",
 		description = "When enabled, OphidiaVenom will say something whenever someone in your party opens the purple chest at TOA.",
 		section = RAIDS,

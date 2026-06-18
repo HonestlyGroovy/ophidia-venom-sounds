@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -44,5 +46,14 @@ public class QuestCompleted
 		}
 		soundEngine.playClip(Sound.QUEST, executor);
 		return true;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.announceQuestCompletion() && configChanged.getKey().equals("announceQuestCompletion")) {
+			soundEngine.playClip(Sound.QUEST, executor);
+			return true;
+		}
+		return false;
 	}
 }

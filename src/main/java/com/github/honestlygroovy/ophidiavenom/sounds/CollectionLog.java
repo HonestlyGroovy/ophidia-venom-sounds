@@ -26,6 +26,7 @@ import net.runelite.client.chat.ChatMessageBuilder;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -104,13 +105,18 @@ public class CollectionLog
 		}
 	}
 
-	public void onConfigChanged(ConfigChanged event)
+	public boolean onConfigChanged(ConfigChanged event)
 	{
 		if ("announceCollectionLog".equals(event.getKey()))
 		{
 			clientThread.invokeLater(() ->
 				checkAndWarnForCollectionLogNotificationSetting(client.getVarbitValue(Varbits.COLLECTION_LOG_NOTIFICATION)));
+			if(config.announceCollectionLog()){
+				soundEngine.playClip(Sound.COLLECTION_LOG_SLOT, executor);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public void onGameStateChanged(GameStateChanged event)
@@ -144,4 +150,5 @@ public class CollectionLog
 			.runeLiteFormattedMessage(highlightedMessage)
 			.build());
 	}
+
 }

@@ -7,6 +7,7 @@ import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
@@ -37,6 +38,17 @@ public class AcceptTrade
 			Text.standardize(chatMessage.getMessage()).equals("accepted trade.") &&
 			chatMessage.getName() == "")
 		{
+			soundEngine.playClip(Sound.ACCEPTED_TRADE, executor);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		log.debug("In AcceptTrade Key: {}, newValue: {}", configChanged.getKey().equals("acceptTrade"), Boolean.valueOf(configChanged.getNewValue()));
+		if (config.acceptTrade() && configChanged.getKey().equals("acceptTrade")) {
+			log.debug("matches true and acceptTrade");
 			soundEngine.playClip(Sound.ACCEPTED_TRADE, executor);
 			return true;
 		}

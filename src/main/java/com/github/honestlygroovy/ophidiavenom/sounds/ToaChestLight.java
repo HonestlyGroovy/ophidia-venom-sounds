@@ -10,6 +10,8 @@ import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.GameObjectSpawned;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -88,5 +90,18 @@ public class ToaChestLight
 				break;
 			}
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.toaWhiteChest() && configChanged.getKey().equals("toaWhiteChest")) {
+			soundEngine.playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
+			return true;
+		}
+		else if (config.toaPurpleChest() && configChanged.getKey().equals("toaPurpleChest")) {
+			soundEngine.playClip(Sound.YOUR_PURPLE, executor);
+			return true;
+		}
+		return false;
 	}
 }

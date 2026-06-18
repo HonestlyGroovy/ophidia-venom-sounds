@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
@@ -48,5 +49,14 @@ public class SlayerCompleted {
 
         soundEngine.playClip(Sound.SLAYER_TASK, executor);
         return true;
+    }
+
+    public boolean onConfigChanged (ConfigChanged configChanged)
+    {
+        if (config.announceSlayerCompletion() && configChanged.getKey().equals("announceSlayerCompletion")) {
+            soundEngine.playClip(Sound.SLAYER_TASK, executor);
+            return true;
+        }
+        return false;
     }
 }

@@ -23,6 +23,7 @@ import net.runelite.api.events.*;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.ClientToolbar;
@@ -443,6 +444,40 @@ public class OphidiavenomPlugin extends Plugin
 		}
 
 		 */
+	}
+
+	@Subscribe
+	public void onConfigChanged(ConfigChanged e) {
+		if (!OphidiavenomConfig.CONFIG_GROUP.equals(e.getGroup()))
+		{
+			return;
+		}
+		log.debug("Key: {}, newValue: {}", e.getKey(), e.getNewValue());
+		if (acceptTrade.onConfigChanged(e)){}
+		else if (achievementDiaries.onConfigChanged(e)){}
+		else if (collectionLog.onConfigChanged(e)){}
+		else if (combatAchievements.onConfigChanged(e)){}
+		else if (coxSounds.onConfigChanged(e)){}
+		else if (crabCheck.onConfigChanged(e)){}
+		else if (death.onConfigChanged(e)){}
+		else if (declineTrade.onConfigChanged(e)){}
+		else if (dismissRandomEvent.onConfigChanged(e)){}
+		else if (enteringBankPin.onConfigChanged(e)){}
+		else if (hunleffSwaps.onConfigChanged(e)){}
+		else if (hunterRumour.onConfigChanged(e)){}
+		else if (killingPlayer.onConfigChanged(e)){}
+		else if (levelUp.onConfigChanged(e)){}
+		else if (livestreamManager.onConfigChanged(e)){}
+		else if (pet.onConfigChanged(e)){}
+		else if (petDog.onConfigChanged(e)){}
+		else if (pkChest.onConfigChanged(e)){}
+		else if (prayerDown.onConfigChanged(e)){}
+		else if (questCompleted.onConfigChanged(e)){}
+		else if (slayerCompleted.onConfigChanged(e)){}
+		else if (toaChestLight.onConfigChanged(e)){}
+		else if (toaChestOpens.onConfigChanged(e)){}
+		else if (tobChestLight.onConfigChanged(e)){}
+		else if (yamaSwaps.onConfigChanged(e)){}
 	}
 
 	public static int TO_GROUP(int id)

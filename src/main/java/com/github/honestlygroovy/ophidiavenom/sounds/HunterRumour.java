@@ -6,6 +6,7 @@ import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
@@ -49,6 +50,15 @@ public class HunterRumour {
                 soundEngine.playClip(Sound.HUNTER_RUMOUR_NOT_COMPLETED, executor);
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean onConfigChanged (ConfigChanged configChanged)
+    {
+        if (config.hunterRumour() && configChanged.getKey().equals("hunterRumour")) {
+            soundEngine.playClip(Sound.HUNTER_RUMOUR, executor);
+            return true;
         }
         return false;
     }

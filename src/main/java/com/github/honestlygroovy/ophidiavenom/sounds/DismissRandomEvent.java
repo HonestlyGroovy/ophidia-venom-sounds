@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -45,5 +47,14 @@ public class DismissRandomEvent
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}
+	}
+
+	public boolean onConfigChanged (ConfigChanged configChanged)
+	{
+		if (config.dismissRandomEvent() && configChanged.getKey().equals("dismissRandomEvent")) {
+			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
+			return true;
+		}
+		return false;
 	}
 }

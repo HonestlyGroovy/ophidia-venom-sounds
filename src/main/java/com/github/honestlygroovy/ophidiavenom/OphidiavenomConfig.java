@@ -62,15 +62,15 @@ public interface OphidiavenomConfig extends Config
 	}
 
 	// =========================================================================
-	// Specs & Combat
+	// Combat
 	// =========================================================================
 
 	@ConfigSection(
-		name = "Specs & Combat",
+		name = "Combat",
 		description = "Special attack and combat-related sound replacements.",
 		position = 20
 	)
-	String SPECS_SECTION = "specsSection";
+	String SPECS_SECTION = "combatSection";
 
 	@ConfigItem(
 			keyName = "crabCheck",
@@ -95,32 +95,6 @@ public interface OphidiavenomConfig extends Config
 	{
 		return true;
 	}
-
-	@ConfigItem(
-			keyName = "hunleffSwaps",
-			name = "Hunleff Swaps",
-			description = "Should OphidiaVenom let you know when to switch prayers at Hunleff? (Requires Sound Effects enabled)",
-			section = SPECS_SECTION,
-			position = 29
-	)
-	default boolean hunleffSwaps()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-			keyName = "yamaSwaps",
-			name = "Yama Swaps",
-			description = "Should OphidiaVenom let you know when to switch prayers at Yama? (Requires Area Sounds enabled)",
-			section = SPECS_SECTION,
-			position = 30
-	)
-	default boolean yamaSwaps()
-	{
-		return true;
-	}
-
-
 
 	// =========================================================================
 	// PvP

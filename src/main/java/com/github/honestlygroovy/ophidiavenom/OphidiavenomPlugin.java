@@ -134,12 +134,6 @@ public class OphidiavenomPlugin extends Plugin
 	private HunterRumour hunterRumour;
 
 	@Inject
-	private HunleffSwaps hunleffSwaps;
-
-	@Inject
-	private YamaSwaps yamaSwaps;
-
-	@Inject
 	private SlayerCompleted slayerCompleted;
 
 	@Inject
@@ -397,11 +391,7 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onSoundEffectPlayed(SoundEffectPlayed event)
 	{
-		if (hunleffSwaps.onSoundEffectPlayed(event))
-		{
-			return;
-		}
-		else if (enteringBankPin.onSoundEffectPlayed(event))
+		if (enteringBankPin.onSoundEffectPlayed(event))
 		{
 			return;
 		}
@@ -414,10 +404,7 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onAreaSoundEffectPlayed(AreaSoundEffectPlayed event)
 	{
-		if (yamaSwaps.onAreaSoundEffectPlayed(event))
-		{
 		return;
-		}
 	}
 
 	@Subscribe
@@ -463,7 +450,6 @@ public class OphidiavenomPlugin extends Plugin
 		else if (declineTrade.onConfigChanged(e)){}
 		else if (dismissRandomEvent.onConfigChanged(e)){}
 		else if (enteringBankPin.onConfigChanged(e)){}
-		else if (hunleffSwaps.onConfigChanged(e)){}
 		else if (hunterRumour.onConfigChanged(e)){}
 		else if (killingPlayer.onConfigChanged(e)){}
 		else if (levelUp.onConfigChanged(e)){}
@@ -477,7 +463,6 @@ public class OphidiavenomPlugin extends Plugin
 		else if (toaChestLight.onConfigChanged(e)){}
 		else if (toaChestOpens.onConfigChanged(e)){}
 		else if (tobChestLight.onConfigChanged(e)){}
-		else if (yamaSwaps.onConfigChanged(e)){}
 	}
 
 	public static int TO_GROUP(int id)

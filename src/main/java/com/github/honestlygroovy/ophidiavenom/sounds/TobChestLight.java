@@ -19,9 +19,7 @@ import net.runelite.api.events.GameObjectDespawned;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -39,9 +37,6 @@ public class TobChestLight
 
 	@Inject
 	private ScheduledExecutorService executor;
-
-	@Inject
-	private ClientThread clientThread;
 
 	private static final int YOUR_TOB_CHEST_PURPLE_OBJ = 32993;
 	private static final int YOUR_TOB_CHEST_NORMAL_OBJ = 32992;

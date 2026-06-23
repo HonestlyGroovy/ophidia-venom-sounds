@@ -26,7 +26,6 @@ import net.runelite.client.chat.ChatMessageBuilder;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j

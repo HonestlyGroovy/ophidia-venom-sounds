@@ -5,7 +5,6 @@ import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.util.Text;
@@ -18,9 +17,6 @@ import java.util.concurrent.ScheduledExecutorService;
 @Slf4j
 public class AcceptTrade
 {
-
-	@Inject
-	private Client client;
 
 	@Inject
 	private OphidiavenomConfig config;
@@ -36,7 +32,7 @@ public class AcceptTrade
 		// Accepting a trade logic, only play sound when message is sent by game
 		if (config.acceptTrade() &&
 			Text.standardize(chatMessage.getMessage()).equals("accepted trade.") &&
-			chatMessage.getName() == "")
+				chatMessage.getName().equals(""))
 		{
 			soundEngine.playClip(Sound.ACCEPTED_TRADE, executor);
 			return true;

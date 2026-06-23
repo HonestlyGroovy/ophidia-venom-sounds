@@ -8,11 +8,9 @@ import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,9 +22,6 @@ import java.util.concurrent.ScheduledExecutorService;
 @Slf4j
 public class DeclineTrade
 {
-
-	@Inject
-	private Client client;
 
 	@Inject
 	private OphidiavenomConfig config;

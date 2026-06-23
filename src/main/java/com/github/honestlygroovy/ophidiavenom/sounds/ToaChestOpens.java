@@ -8,18 +8,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.api.events.GameObjectSpawned;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
 public class ToaChestOpens
 {
-
-	@Inject
-	private Client client;
 
 	@Inject
 	private OphidiavenomConfig config;

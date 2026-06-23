@@ -11,7 +11,6 @@ import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.SoundEffectPlayed;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

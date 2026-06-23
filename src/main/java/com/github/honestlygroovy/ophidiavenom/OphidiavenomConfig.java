@@ -49,18 +49,6 @@ public interface OphidiavenomConfig extends Config
 		return true;
 	}
 
-	@ConfigItem(
-		keyName = "onlyForOwnPlayer",
-		name = "Only Own Player",
-		description = "Should OphidiaVenom sounds play for your player only?",
-		section = GENERAL_SECTION,
-		position = 13
-	)
-	default boolean ownPlayerOnly()
-	{
-		return true;
-	}
-
 	// =========================================================================
 	// Combat
 	// =========================================================================
@@ -499,43 +487,4 @@ public interface OphidiavenomConfig extends Config
 		return new Color(15,68,25);
 	}
 
-	// =========================================================================
-	// Developer (always last)
-	// =========================================================================
-/*
-	@ConfigSection(
-		name = "Developer",
-		description = "Developer mode configurations.",
-		position = 900,
-		closedByDefault = true
-	)
-	String DEVELOPER_SECTION = "developerSection";
-
-	@ConfigItem(
-		keyName = "developerLogging",
-		name = "Developer Logging",
-		description = "Enable developer logging when developer mode is active.",
-		section = DEVELOPER_SECTION,
-		position = 901
-	)
-	default boolean developerLogging()
-	{
-		return false;
-	}
-*/
-	// =========================================================================
-	// Internal (hidden)
-	// =========================================================================
-
-	@ConfigItem(
-		keyName = SOUND_OVERRIDE_POOLS_KEY,
-		name = "Sound Override Pools",
-		description = "Internal storage for sound override selections.",
-		position = 10000,
-		hidden = true
-	)
-	default String soundOverridePools()
-	{
-		return "";
-	}
 }

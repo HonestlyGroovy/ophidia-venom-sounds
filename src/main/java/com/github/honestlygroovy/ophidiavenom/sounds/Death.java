@@ -8,7 +8,6 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.events.ActorDeath;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -7,7 +7,6 @@ import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.events.ChatMessage;
@@ -19,8 +18,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Pattern;
-
-import static com.github.honestlygroovy.ophidiavenom.OphidiavenomPlugin.OPHIDIAVENOM;
 
 @Singleton
 @Slf4j
@@ -47,7 +44,7 @@ public class KillingPlayer
 		String standardized = Text.standardize(chatMessage.getMessage());
 		// Player Kill message checks
 		if (config.playerKilling() &&
-			chatMessage.getName().equals(""))
+				chatMessage.getName().equals(""))
 		{
 			Pattern[] patterns = PlayerKillLineManager.getPatterns();
 			for (Pattern pattern : patterns)

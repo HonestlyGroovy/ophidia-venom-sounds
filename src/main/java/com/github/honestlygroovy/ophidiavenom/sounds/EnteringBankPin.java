@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.SoundEffectPlayed;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,9 +18,6 @@ import java.util.concurrent.ScheduledExecutorService;
 @Slf4j
 public class EnteringBankPin
 {
-
-	@Inject
-	private Client client;
 
 	@Inject
 	private OphidiavenomConfig config;

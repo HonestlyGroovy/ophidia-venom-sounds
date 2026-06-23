@@ -5,16 +5,13 @@ import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Actor;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 
 import net.runelite.api.events.ActorDeath;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
-import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Singleton;
 

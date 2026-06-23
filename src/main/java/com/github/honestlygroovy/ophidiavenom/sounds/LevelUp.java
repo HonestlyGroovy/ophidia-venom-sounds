@@ -10,7 +10,6 @@ import net.runelite.api.Experience;
 import net.runelite.api.Skill;
 import net.runelite.api.events.StatChanged;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

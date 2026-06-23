@@ -13,15 +13,11 @@ import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
 public class DismissRandomEvent
 {
-
-	@Inject
-	private Client client;
 
 	@Inject
 	private OphidiavenomConfig config;

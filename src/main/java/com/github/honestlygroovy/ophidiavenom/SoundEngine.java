@@ -7,7 +7,6 @@ import net.runelite.client.audio.AudioPlayer;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;

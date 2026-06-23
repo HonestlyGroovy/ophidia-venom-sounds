@@ -4,21 +4,15 @@ package com.github.honestlygroovy.ophidiavenom;
 import com.github.honestlygroovy.ophidiavenom.livestreams.LivestreamManager;
 import com.github.honestlygroovy.ophidiavenom.sounds.*;
 import com.google.inject.Provides;
-import com.google.inject.name.Named;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
+
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.Player;
 import net.runelite.api.events.*;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -26,8 +20,6 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.ui.ClientToolbar;
-import net.runelite.client.ui.NavigationButton;
 import okhttp3.OkHttpClient;
 
 @Slf4j
@@ -50,9 +42,6 @@ public class OphidiavenomPlugin extends Plugin
 	private SoundEngine soundEngine;
 
 	@Inject
-	private OphidiavenomConfig config;
-
-	@Inject
 	private ScheduledExecutorService executor;
 
 	@Inject
@@ -69,9 +58,6 @@ public class OphidiavenomPlugin extends Plugin
 
 	@Inject
 	private PetDog petDog;
-
-	@Inject
-	private DebugScripts debugScripts;
 
 	@Inject
 	private PrayerDown prayerDown;
@@ -125,9 +111,6 @@ public class OphidiavenomPlugin extends Plugin
 	private ChatRightClickManager chatRightClickManager;
 
 	@Inject
-	private ClientToolbar clientToolbar;
-
-	@Inject
 	private CrabCheck crabCheck;
 
 	@Inject
@@ -136,17 +119,10 @@ public class OphidiavenomPlugin extends Plugin
 	@Inject
 	private SlayerCompleted slayerCompleted;
 
-	@Inject
-	@Named("developerMode")
-	private boolean developerMode;
-
-	private NavigationButton soundOverridesNavigationButton;
-
 	public static final String OPHIDIAVENOM = "OphidiaVenom";
 
 	@Override
-	protected void startUp() throws Exception
-	{
+	protected void startUp() {
 		clientThread.invoke(this::setupOldMaps);
 		achievementDiaries.setLastLoginTick(-1);
 		prayerDown.setLastLoginTick(-1);
@@ -158,41 +134,10 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Override
-	protected void shutDown() throws Exception
-	{
+	protected void shutDown() {
 		levelUp.clear();
 		achievementDiaries.clearOldAchievementDiaries();
 		soundEngine.close();
-	}
-
-	private static BufferedImage createOverridesIcon()
-	{
-		final int size = 16;
-		BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D graphics = image.createGraphics();
-		try
-		{
-			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			graphics.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-
-			Color speakerColor = new Color(235, 235, 235);
-			graphics.setColor(speakerColor);
-
-			int[] speakerX = {3, 6, 9, 9, 6, 3};
-			int[] speakerY = {6, 6, 3, 13, 10, 10};
-			graphics.fillPolygon(speakerX, speakerY, speakerX.length);
-
-			graphics.setStroke(new java.awt.BasicStroke(1.4f));
-			Color waveColor = new Color(255, 152, 41);
-			graphics.setColor(waveColor);
-			graphics.drawArc(7, 4, 4, 8, -55, 110);
-			graphics.drawArc(9, 2, 5, 12, -55, 110);
-		}
-		finally
-		{
-			graphics.dispose();
-		}
-		return image;
 	}
 
 	private void setupOldMaps()
@@ -248,75 +193,28 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onActorDeath(ActorDeath actorDeath)
 	{
-		if (crabCheck.onActorDeath(actorDeath))
-		{
-			return;
-		}
-		else if (death.onActorDeath(actorDeath))
-		{
-			return;
-		}
+		if (crabCheck.onActorDeath(actorDeath)) {}
+		else if (death.onActorDeath(actorDeath)) {}
 	}
 
 	@Subscribe
 	public void onChatMessage(ChatMessage chatMessage)
 	{
-		if (acceptTrade.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (petDog.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (pet.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (collectionLog.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (questCompleted.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (combatAchievements.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (killingPlayer.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (coxSounds.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (hunterRumour.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (slayerCompleted.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (chatMessage.getType() != ChatMessageType.GAMEMESSAGE && chatMessage.getType() != ChatMessageType.SPAM)
-		{
-			return;
-		}
+		if (acceptTrade.onChatMessage(chatMessage)) {}
+		else if (petDog.onChatMessage(chatMessage)) {}
+		else if (pet.onChatMessage(chatMessage)) {}
+		else if (collectionLog.onChatMessage(chatMessage)) {}
+		else if (questCompleted.onChatMessage(chatMessage)) {}
+		else if (combatAchievements.onChatMessage(chatMessage)) {}
+		else if (killingPlayer.onChatMessage(chatMessage)) {}
+		else if (coxSounds.onChatMessage(chatMessage)) {}
+		else if (hunterRumour.onChatMessage(chatMessage)) {}
+		else if (slayerCompleted.onChatMessage(chatMessage)) {}
 	}
 
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
-		/*
-		if (developerMode && config.developerLogging())
-		{
-			debugScripts.onVarbitChanged(event);
-		}
-		*/
-
 		tobChestLight.onVarbitChanged(event);
 		collectionLog.onVarbitChanged(event);
 		achievementDiaries.onVarbitChanged(event);
@@ -326,33 +224,15 @@ public class OphidiavenomPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
-		/*
-		if (developerMode && config.developerLogging())
-		{
-			debugScripts.onMenuOptionClicked(menuOptionClicked);
-		}
-
-		 */
-
 		petDog.onMenuOptionClicked(menuOptionClicked);
 		declineTrade.onMenuOptionClicked(menuOptionClicked);
 		dismissRandomEvent.onMenuOptionClicked(menuOptionClicked);
-
 	}
 
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded event)
 	{
-		/*
-		if (developerMode && config.developerLogging())
-		{
-			debugScripts.onWidgetLoaded(event);
-		}
-
-		 */
-
 		pkChest.onWidgetLoaded(event);
-
 	}
 
 	@Provides
@@ -368,7 +248,6 @@ public class OphidiavenomPlugin extends Plugin
 		{
 			return;
 		}
-		final Player local = client.getLocalPlayer();
 		int currentTick = client.getTickCount();
 
 		prayerDown.onGameTick(event);
@@ -384,27 +263,14 @@ public class OphidiavenomPlugin extends Plugin
 	private void cleanupTicks(final int currentTick)
 	{
 		petDog.cleanupTicks(currentTick);
-
 	}
 
 
 	@Subscribe
 	public void onSoundEffectPlayed(SoundEffectPlayed event)
 	{
-		if (enteringBankPin.onSoundEffectPlayed(event))
-		{
-			return;
-		}
-		else if (prayerDown.onSoundEffectPlayed(event))
-		{
-			return;
-		}
-	}
-
-	@Subscribe
-	public void onAreaSoundEffectPlayed(AreaSoundEffectPlayed event)
-	{
-		return;
+		if (enteringBankPin.onSoundEffectPlayed(event)) {}
+		else if (prayerDown.onSoundEffectPlayed(event)) {}
 	}
 
 	@Subscribe
@@ -422,24 +288,11 @@ public class OphidiavenomPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onScriptCallbackEvent(ScriptCallbackEvent scriptCallbackEvent)
-	{
-		/*
-		if (developerMode && config.developerLogging())
-		{
-			debugScripts.onScriptCallbackEvent(scriptCallbackEvent);
-		}
-
-		 */
-	}
-
-	@Subscribe
 	public void onConfigChanged(ConfigChanged e) {
 		if (!OphidiavenomConfig.CONFIG_GROUP.equals(e.getGroup()))
 		{
 			return;
 		}
-		log.debug("Key: {}, newValue: {}", e.getKey(), e.getNewValue());
 		if (acceptTrade.onConfigChanged(e)){}
 		else if (achievementDiaries.onConfigChanged(e)){}
 		else if (collectionLog.onConfigChanged(e)){}

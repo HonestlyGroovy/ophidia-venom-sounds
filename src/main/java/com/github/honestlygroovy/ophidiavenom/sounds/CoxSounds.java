@@ -4,7 +4,6 @@ import com.github.honestlygroovy.ophidiavenom.OphidiavenomConfig;
 import com.github.honestlygroovy.ophidiavenom.Sound;
 import com.github.honestlygroovy.ophidiavenom.SoundEngine;
 
-import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,8 +33,6 @@ public class CoxSounds
 
 	@Inject
 	private ScheduledExecutorService executor;
-
-	private Random random = new Random();
 
 	// YOINK from https://github.com/AnkouOSRS/cox-light-colors/blob/master/src/main/java/com/coxlightcolors/CoxLightColorsPlugin.java#L82
 

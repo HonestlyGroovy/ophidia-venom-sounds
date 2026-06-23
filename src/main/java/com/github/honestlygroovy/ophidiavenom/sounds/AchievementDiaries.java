@@ -22,7 +22,6 @@ import static net.runelite.api.Varbits.DIARY_KARAMJA_MEDIUM;
 import net.runelite.api.annotations.Varbit;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -40,7 +39,6 @@ public class AchievementDiaries
 
 	@Inject
 	private ScheduledExecutorService executor;
-	private static final Random random = new Random();
 
 	private int lastLoginTick = -1;
 

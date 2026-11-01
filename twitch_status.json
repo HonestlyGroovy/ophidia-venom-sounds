@@ -1,5 +1,11 @@
 {
- "live": true,
- "title": "",
- "wentLiveAt": "2026-11-01T22:30:07Z"
+ "live": false,
+ "title": "<html>
+<head><title>500 Internal Server Error</title></head>
+<body>
+<center><h1>500 Internal Server Error</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>",
+ "wentLiveAt": "2026-11-01T22:31:25Z"
 }
